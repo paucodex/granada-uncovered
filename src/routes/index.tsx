@@ -43,7 +43,6 @@ function Index() {
       <main>
         <Hero />
         <Categories />
-        <HowItWorks />
 
         {/* This week */}
         <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
