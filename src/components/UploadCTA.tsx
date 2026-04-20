@@ -6,10 +6,15 @@ export function UploadCTA() {
   return (
     <section
       id="subir"
-      className="relative overflow-hidden border-y border-border bg-foreground py-20 text-background"
+      className="relative overflow-hidden border-y border-border py-20 text-background"
+      style={{
+        background:
+          "linear-gradient(135deg, var(--brand-purple) 0%, oklch(0.45 0.2 305) 50%, var(--brand-coral) 100%)",
+      }}
     >
-      <div className="absolute -left-10 top-10 h-40 w-40 rotate-12 rounded-full bg-[color:var(--brand-coral)] opacity-70 blur-3xl" />
-      <div className="absolute -right-10 bottom-10 h-52 w-52 rounded-full bg-[color:var(--brand-blue)] opacity-60 blur-3xl" />
+      <div className="absolute -left-10 top-10 h-56 w-56 rotate-12 rounded-full bg-[color:var(--brand-coral)] opacity-60 blur-3xl" />
+      <div className="absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-[color:var(--brand-purple)] opacity-70 blur-3xl" />
+      <div className="absolute left-1/2 top-1/3 h-40 w-40 rounded-full bg-orange-400 opacity-40 blur-3xl" />
 
       <div className="relative mx-auto max-w-4xl px-4 text-center md:px-8">
         <span className="inline-block rotate-[-3deg] rounded-full bg-[color:var(--brand-yellow)] px-3 py-1 text-xs font-extrabold uppercase text-foreground">
