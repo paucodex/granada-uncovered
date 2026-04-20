@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { EventCard } from "@/components/EventCard";
-import { Categories } from "@/components/Categories";
+import { Categories, type CategoryFilter } from "@/components/Categories";
 import { UploadCTA } from "@/components/UploadCTA";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
 import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
-import { CategoryFilterProvider, useCategoryFilter } from "@/lib/category-filter";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -38,35 +38,36 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return (
-    <CategoryFilterProvider>
-      <IndexContent />
-    </CategoryFilterProvider>
-  );
-}
+  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("Todos");
 
-function IndexContent() {
-  const { active } = useCategoryFilter();
-  const filterFn = (e: { category: string }) => active === "Todos" || e.category === active;
-  const filteredWeek = thisWeekEvents.filter(filterFn);
-  const filteredDiscovery = discoveryEvents.filter(filterFn);
+  const filteredWeek = useMemo(
+    () =>
+      selectedCategory === "Todos"
+        ? thisWeekEvents
+        : thisWeekEvents.filter((event) => event.category === selectedCategory),
+    [selectedCategory],
+  );
+
+  const filteredDiscovery = useMemo(
+    () =>
+      selectedCategory === "Todos"
+        ? discoveryEvents
+        : discoveryEvents.filter((event) => event.category === selectedCategory),
+    [selectedCategory],
+  );
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <main>
         <Hero />
-        <Categories />
+        <Categories active={selectedCategory} onSelect={setSelectedCategory} />
 
-        {/* This week */}
         <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
           <SectionHeader
             eyebrow="Esta semana"
             cta={
-              <a
-                href="#"
-                className="text-sm font-semibold underline-offset-4 hover:underline"
-              >
+              <a href="#" className="text-sm font-semibold underline-offset-4 hover:underline">
                 Ver toda la agenda →
               </a>
             }
@@ -86,7 +87,6 @@ function IndexContent() {
           )}
         </section>
 
-        {/* Discovery */}
         <section
           id="explorar"
           className="border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-24"
@@ -114,7 +114,6 @@ function IndexContent() {
         </section>
 
         <HowItWorks />
-
         <UploadCTA />
       </main>
       <Footer />
