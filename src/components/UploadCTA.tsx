@@ -9,7 +9,7 @@ export function UploadCTA() {
       className="relative overflow-hidden border-y border-border py-20 text-background"
       style={{
         background:
-          "linear-gradient(135deg, color-mix(in oklab, var(--brand-purple) 92%, black) 0%, color-mix(in oklab, var(--brand-coral) 90%, black) 100%)",
+          "linear-gradient(135deg, color-mix(in oklab, var(--brand-purple) 95%, black) 0%, color-mix(in oklab, var(--brand-coral) 65%, var(--brand-purple)) 100%)",
       }}
     >
       {/* Soft color blobs */}
