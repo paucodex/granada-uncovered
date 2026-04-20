@@ -9,14 +9,16 @@ export function UploadCTA() {
       className="relative overflow-hidden border-y border-border py-20 text-background"
       style={{
         background:
-          "linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-coral) 100%)",
+          "linear-gradient(135deg, color-mix(in oklab, var(--brand-purple) 80%, black) 0%, color-mix(in oklab, var(--brand-coral) 75%, black) 100%)",
       }}
     >
       {/* Soft color blobs */}
-      <div className="absolute -left-16 top-8 h-72 w-72 rounded-full bg-[color:var(--brand-purple)] opacity-60 blur-3xl" />
-      <div className="absolute right-0 top-1/4 h-64 w-64 rounded-full bg-[color:var(--brand-blue)] opacity-55 blur-3xl" />
-      <div className="absolute left-1/3 bottom-0 h-72 w-72 rounded-full bg-[color:var(--brand-coral)] opacity-55 blur-3xl" />
-      <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-[color:var(--brand-yellow)] opacity-50 blur-3xl" />
+      <div className="absolute -left-16 top-8 h-72 w-72 rounded-full bg-[color:var(--brand-purple)] opacity-40 blur-3xl" />
+      <div className="absolute right-0 top-1/4 h-64 w-64 rounded-full bg-[color:var(--brand-blue)] opacity-35 blur-3xl" />
+      <div className="absolute left-1/3 bottom-0 h-72 w-72 rounded-full bg-[color:var(--brand-coral)] opacity-35 blur-3xl" />
+      <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-[color:var(--brand-yellow)] opacity-30 blur-3xl" />
+      {/* Dark overlay for legibility */}
+      <div className="pointer-events-none absolute inset-0 bg-black/25" />
 
       {/* Grain noise overlay */}
       <div
