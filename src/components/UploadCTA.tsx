@@ -9,12 +9,23 @@ export function UploadCTA() {
       className="relative overflow-hidden border-y border-border py-20 text-background"
       style={{
         background:
-          "linear-gradient(135deg, var(--brand-purple) 0%, oklch(0.45 0.2 305) 50%, var(--brand-coral) 100%)",
+          "linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-blue) 35%, var(--brand-coral) 70%, var(--brand-yellow) 100%)",
       }}
     >
-      <div className="absolute -left-10 top-10 h-56 w-56 rotate-12 rounded-full bg-[color:var(--brand-coral)] opacity-60 blur-3xl" />
-      <div className="absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-[color:var(--brand-purple)] opacity-70 blur-3xl" />
-      <div className="absolute left-1/2 top-1/3 h-40 w-40 rounded-full bg-orange-400 opacity-40 blur-3xl" />
+      {/* Soft color blobs */}
+      <div className="absolute -left-16 top-8 h-72 w-72 rounded-full bg-[color:var(--brand-purple)] opacity-60 blur-3xl" />
+      <div className="absolute right-0 top-1/4 h-64 w-64 rounded-full bg-[color:var(--brand-blue)] opacity-55 blur-3xl" />
+      <div className="absolute left-1/3 bottom-0 h-72 w-72 rounded-full bg-[color:var(--brand-coral)] opacity-55 blur-3xl" />
+      <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-[color:var(--brand-yellow)] opacity-50 blur-3xl" />
+
+      {/* Grain noise overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+        }}
+      />
 
       <div className="relative mx-auto max-w-4xl px-4 text-center md:px-8">
         <span className="inline-block rotate-[-3deg] rounded-full bg-[color:var(--brand-yellow)] px-3 py-1 text-xs font-extrabold uppercase text-foreground">
