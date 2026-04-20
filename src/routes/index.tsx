@@ -1,26 +1,91 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { SectionHeader } from "@/components/SectionHeader";
+import { EventCard } from "@/components/EventCard";
+import { Categories } from "@/components/Categories";
+import { UploadCTA } from "@/components/UploadCTA";
+import { Footer } from "@/components/Footer";
+import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "ENTÉRATE — Planes y cultura en Granada" },
+      {
+        name: "description",
+        content:
+          "Descubre eventos, planes culturales y cosas que están pasando en Granada — aunque no salgan en Google.",
+      },
+      { property: "og:title", content: "ENTÉRATE — Planes en Granada" },
+      {
+        property: "og:description",
+        content: "Lo que está pasando en Granada de verdad. Súbete al feed de la ciudad.",
+      },
+    ],
+    links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&display=swap",
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      <Navbar />
+      <main>
+        <Hero />
+        <Categories />
+
+        {/* This week */}
+        <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
+          <SectionHeader
+            eyebrow="Esta semana"
+            cta={
+              <a href="#" className="text-sm font-semibold underline-offset-4 hover:underline">
+                Ver toda la agenda →
+              </a>
+            }
+          >
+            Esta <span className="mark-yellow">semana</span>
+            <br />
+            en Granada
+          </SectionHeader>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {thisWeekEvents.map((e) => (
+              <EventCard key={e.id} event={e} />
+            ))}
+          </div>
+        </section>
+
+        {/* Discovery */}
+        <section
+          id="explorar"
+          className="relative border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-28"
+        >
+          <div className="mx-auto max-w-7xl px-4 md:px-8">
+            <SectionHeader eyebrow="Bajo el radar">
+              ¿No te has enterao
+              <br />
+              de <span className="italic underline decoration-[color:var(--brand-coral)] decoration-[6px] underline-offset-8">esto</span>?
+            </SectionHeader>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {discoveryEvents.map((e) => (
+                <EventCard key={e.id} event={e} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <UploadCTA />
+      </main>
+      <Footer />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
