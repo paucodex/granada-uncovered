@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { EventCard } from "@/components/EventCard";
 import { Categories } from "@/components/Categories";
 import { UploadCTA } from "@/components/UploadCTA";
+import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
 import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
 
