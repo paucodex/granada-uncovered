@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { EventCard } from "@/components/EventCard";
 import { Categories } from "@/components/Categories";
 import { UploadCTA } from "@/components/UploadCTA";
+import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
 import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
 
@@ -42,6 +43,7 @@ function Index() {
       <main>
         <Hero />
         <Categories />
+        <HowItWorks />
 
         {/* This week */}
         <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
