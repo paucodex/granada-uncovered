@@ -8,6 +8,7 @@ import { UploadCTA } from "@/components/UploadCTA";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
 import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
+import { CategoryFilterProvider, useCategoryFilter } from "@/lib/category-filter";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -38,6 +39,19 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
+    <CategoryFilterProvider>
+      <IndexContent />
+    </CategoryFilterProvider>
+  );
+}
+
+function IndexContent() {
+  const { active } = useCategoryFilter();
+  const filterFn = (e: { category: string }) => active === "Todos" || e.category === active;
+  const filteredWeek = thisWeekEvents.filter(filterFn);
+  const filteredDiscovery = discoveryEvents.filter(filterFn);
+
+  return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <main>
@@ -59,11 +73,17 @@ function Index() {
           >
             Esta <span className="mark-yellow">semana</span> en Granada
           </SectionHeader>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {thisWeekEvents.map((e) => (
-              <EventCard key={e.id} event={e} />
-            ))}
-          </div>
+          {filteredWeek.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredWeek.map((e) => (
+                <EventCard key={e.id} event={e} />
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-2xl border-2 border-dashed border-border p-10 text-center text-muted-foreground">
+              Nada de esta vibe esta semana. Prueba otra categoría ✌️
+            </p>
+          )}
         </section>
 
         {/* Discovery */}
@@ -79,11 +99,17 @@ function Index() {
               </span>
               ?
             </SectionHeader>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {discoveryEvents.map((e) => (
-                <EventCard key={e.id} event={e} />
-              ))}
-            </div>
+            {filteredDiscovery.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {filteredDiscovery.map((e) => (
+                  <EventCard key={e.id} event={e} />
+                ))}
+              </div>
+            ) : (
+              <p className="rounded-2xl border-2 border-dashed border-border p-10 text-center text-muted-foreground">
+                Aún no hay nada bajo el radar de esta categoría.
+              </p>
+            )}
           </div>
         </section>
 
