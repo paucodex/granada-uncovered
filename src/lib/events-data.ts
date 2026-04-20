@@ -9,8 +9,7 @@ export const thisWeekEvents: EventItem[] = [
     location: "El Realejo",
     time: "Vie · 22:00",
     going: 24,
-    accent: "yellow",
-    tag: "secreto",
+    featured: true,
   },
   {
     id: "2",
@@ -29,7 +28,6 @@ export const thisWeekEvents: EventItem[] = [
     location: "Mirador San Nicolás",
     time: "Dom · 21:30",
     going: 142,
-    tag: "gratis",
   },
 ];
 
@@ -42,7 +40,6 @@ export const discoveryEvents: EventItem[] = [
     location: "Casa secreta",
     time: "Jue · 20:00",
     going: 12,
-    tag: "íntimo",
   },
   {
     id: "5",
@@ -61,7 +58,5 @@ export const discoveryEvents: EventItem[] = [
     location: "Sacromonte",
     time: "Sáb · 23:00",
     going: 56,
-    accent: "yellow",
-    tag: "solo hoy",
   },
 ];

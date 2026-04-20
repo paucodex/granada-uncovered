@@ -44,18 +44,19 @@ function Index() {
         <Categories />
 
         {/* This week */}
-        <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
+        <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
           <SectionHeader
             eyebrow="Esta semana"
             cta={
-              <a href="#" className="text-sm font-semibold underline-offset-4 hover:underline">
+              <a
+                href="#"
+                className="text-sm font-semibold underline-offset-4 hover:underline"
+              >
                 Ver toda la agenda →
               </a>
             }
           >
-            Esta <span className="mark-yellow">semana</span>
-            <br />
-            en Granada
+            Esta <span className="mark-yellow">semana</span> en Granada
           </SectionHeader>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {thisWeekEvents.map((e) => (
@@ -67,13 +68,15 @@ function Index() {
         {/* Discovery */}
         <section
           id="explorar"
-          className="relative border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-28"
+          className="border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-24"
         >
           <div className="mx-auto max-w-7xl px-4 md:px-8">
             <SectionHeader eyebrow="Bajo el radar">
-              ¿No te has enterao
-              <br />
-              de <span className="italic underline decoration-[color:var(--brand-coral)] decoration-[6px] underline-offset-8">esto</span>?
+              ¿No te has enterao de{" "}
+              <span className="italic underline decoration-[color:var(--brand-coral)] decoration-[5px] underline-offset-[10px]">
+                esto
+              </span>
+              ?
             </SectionHeader>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {discoveryEvents.map((e) => (
