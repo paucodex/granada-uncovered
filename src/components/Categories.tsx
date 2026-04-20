@@ -1,4 +1,7 @@
-const categories = [
+import { useCategoryFilter, type CategoryFilter } from "@/lib/category-filter";
+
+const categories: { name: CategoryFilter; emoji: string; color: string }[] = [
+  { name: "Todos", emoji: "✺", color: "var(--brand-blue)" },
   { name: "Cultura", emoji: "🎭", color: "var(--brand-purple)" },
   { name: "Mercadillos", emoji: "🛍️", color: "var(--brand-yellow)" },
   { name: "Música", emoji: "🎶", color: "var(--brand-coral)" },
@@ -6,21 +9,35 @@ const categories = [
 ];
 
 export function Categories() {
+  const { active, setActive } = useCategoryFilter();
+
   return (
     <section className="border-y border-border bg-background py-10">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <p className="mb-5 text-sm font-medium text-muted-foreground">Filtra por vibe →</p>
         <div className="flex flex-wrap gap-3">
-          {categories.map((c) => (
-            <button
-              key={c.name}
-              className="group flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-5 py-2.5 text-base font-bold transition hover:-translate-y-0.5"
-              style={{ boxShadow: `4px 4px 0 ${c.color}` }}
-            >
-              <span className="text-lg">{c.emoji}</span>
-              {c.name}
-            </button>
-          ))}
+          {categories.map((c) => {
+            const isActive = active === c.name;
+            return (
+              <button
+                key={c.name}
+                onClick={() => setActive(c.name)}
+                aria-pressed={isActive}
+                className={`group flex items-center gap-2 rounded-full border-2 border-foreground px-5 py-2.5 text-base font-bold transition-all duration-200 hover:-translate-y-0.5 ${
+                  isActive
+                    ? "-translate-y-0.5 text-background"
+                    : "bg-background text-foreground"
+                }`}
+                style={{
+                  boxShadow: isActive ? `2px 2px 0 var(--foreground)` : `4px 4px 0 ${c.color}`,
+                  backgroundColor: isActive ? c.color : undefined,
+                }}
+              >
+                <span className="text-lg">{c.emoji}</span>
+                {c.name}
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>
