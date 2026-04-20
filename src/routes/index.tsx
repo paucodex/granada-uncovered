@@ -87,6 +87,8 @@ function Index() {
           </div>
         </section>
 
+        <HowItWorks />
+
         <UploadCTA />
       </main>
       <Footer />
