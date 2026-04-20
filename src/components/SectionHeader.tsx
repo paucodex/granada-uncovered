@@ -18,7 +18,7 @@ export function SectionHeader({
             {eyebrow}
           </p>
         )}
-        <h2 className="font-display text-4xl font-extrabold leading-[0.95] md:text-6xl">
+        <h2 className="font-display text-3xl font-extrabold leading-[1] tracking-tight md:text-5xl">
           {children}
         </h2>
       </div>
