@@ -10,7 +10,8 @@ export type Vibe =
   | "Comida"
   | "Friki"
   | "Artesanía"
-  | "Humor";
+  | "Humor"
+  | "Otros";
 
 export type SourceType = "Instagram" | "TikTok" | "Cartel" | "Boca a boca" | "Web";
 export type PriceType = "Gratis" | "De pago" | "Donativo";
@@ -49,6 +50,7 @@ export const VIBES: { name: Vibe | "Todos"; emoji: string; color: string; slug: 
   { name: "Friki", emoji: "🎮", color: "var(--brand-purple)", slug: "friki" },
   { name: "Artesanía", emoji: "🧶", color: "var(--brand-yellow)", slug: "artesania" },
   { name: "Humor", emoji: "🎤", color: "var(--brand-neon)", slug: "humor" },
+  { name: "Otros", emoji: "✦", color: "var(--brand-blue)", slug: "otros" },
 ];
 
 export function vibeBySlug(slug: string) {
