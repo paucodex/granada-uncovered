@@ -103,8 +103,8 @@ function EventDetail() {
                   return (
                     <Link
                       key={t}
-                      to="/categoria/$slug"
-                      params={{ slug: meta?.slug ?? "todos" }}
+                      to="/explorar"
+                      search={{ vibe: meta?.slug && meta.slug !== "todos" ? meta.slug : undefined }}
                       className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold text-muted-foreground hover:border-foreground hover:text-foreground"
                     >
                       {t}
