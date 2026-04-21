@@ -337,6 +337,25 @@ function CrearPage() {
             />
           </Field>
 
+          <div className="rounded-xl border-2 border-border bg-card p-4">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={isPublic}
+                onChange={(e) => setIsPublic(e.target.checked)}
+                className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-foreground"
+              />
+              <span className="text-sm font-medium">
+                Confirmo que este plan es <span className="font-bold">público y verificable</span>.
+              </span>
+            </label>
+            {errors.isPublic ? (
+              <span className="mt-2 block text-xs font-medium text-[color:var(--destructive,#ef4444)]">
+                {errors.isPublic}
+              </span>
+            ) : null}
+          </div>
+
           <div className="flex items-center justify-between gap-3 border-t border-border pt-6">
             <Link to="/explorar" className="text-sm text-muted-foreground hover:text-foreground">
               Cancelar
