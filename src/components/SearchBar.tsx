@@ -9,29 +9,29 @@ export function SearchBar() {
       aria-label="Buscar eventos"
       className="border-b border-border bg-background"
     >
-      <div className="mx-auto max-w-4xl px-4 py-6 md:px-8 md:py-8">
+      <div className="mx-auto max-w-2xl px-4 py-4 md:px-6 md:py-5">
         <form
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          className="group relative flex items-center gap-3 rounded-full border-2 border-foreground bg-background px-5 py-3 shadow-[4px_4px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5 focus-within:shadow-[6px_6px_0_0_oklch(0.2_0_0)] md:px-7 md:py-4"
+          className="group relative flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-4 py-2 shadow-[3px_3px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5 focus-within:shadow-[4px_4px_0_0_oklch(0.2_0_0)]"
         >
-          <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
+          <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Busca conciertos, mercadillos, exposiciones…"
-            className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground md:text-lg"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
           />
           <button
             type="submit"
-            className="hidden shrink-0 rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition hover:-translate-y-0.5 sm:inline-block"
+            className="hidden shrink-0 rounded-full bg-foreground px-3 py-1 text-xs font-semibold text-background transition hover:-translate-y-0.5 sm:inline-block"
           >
             Buscar
           </button>
         </form>
-        <p className="mt-3 text-center text-xs text-muted-foreground">
+        <p className="mt-2 text-center text-[11px] text-muted-foreground">
           Descubre lo que está pasando en Granada — aunque no salga en Google.
         </p>
       </div>
