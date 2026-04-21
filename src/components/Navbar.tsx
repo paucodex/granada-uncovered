@@ -1,4 +1,4 @@
-import { Search, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { useAuth } from "@/auth/AuthProvider";
@@ -18,13 +18,6 @@ export function Navbar() {
           >
             Explorar
           </a>
-          <button
-            aria-label="Buscar"
-            className="grid h-9 w-9 place-items-center rounded-full hover:bg-muted"
-          >
-            <Search className="h-4 w-4" />
-          </button>
-
           {user ? (
             <>
               <span className="hidden text-xs text-muted-foreground md:inline">
