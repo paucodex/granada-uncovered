@@ -65,7 +65,7 @@ export const events: AppEvent[] = [
     title: "Paseo por el Parque Federico García Lorca",
     description:
       "Un paseo tranquilo por uno de los parques más bonitos de Granada. Quedamos a la entrada y caminamos sin prisa, comentando lo que vemos.",
-    image: "https://images.unsplash.com/photo-1444930694458-01babe71870e?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "10:30",
     location: "Parque Federico García Lorca",
