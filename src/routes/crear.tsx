@@ -63,7 +63,7 @@ function CrearPage() {
         </p>
         <div className="mt-4 rounded-xl border-2 border-dashed border-border bg-muted/40 px-4 py-3 text-sm">
           <strong className="font-bold">Solo planes abiertos al público.</strong>{" "}
-          <span className="text-muted-foreground">Nada de eventos privados.</span>
+          <span className="text-muted-foreground">Nada de eventos personales privados.</span>
         </div>
 
         <EventForm mode="create" />
