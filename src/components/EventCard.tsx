@@ -74,6 +74,11 @@ export function EventCard({ event }: { event: AppEvent }) {
           src={event.image}
           alt={event.title}
           loading="lazy"
+          onError={(e) => {
+            const img = e.currentTarget;
+            const fallback = `https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80`;
+            if (img.src !== fallback) img.src = fallback;
+          }}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
         <span

@@ -11,20 +11,19 @@ export function Navbar() {
 
   const onSearch = (e: FormEvent) => {
     e.preventDefault();
-    navigate({ to: "/explorar", search: { q: query, vibe: "todos" } });
+    navigate({ to: "/explorar", search: { q: query || undefined } });
   };
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3.5 md:px-8 md:gap-6">
+      <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 md:px-8 md:gap-5">
         <Logo />
 
-        <nav className="hidden items-center gap-4 text-sm font-medium md:flex">
+        <nav className="hidden items-center gap-1 text-sm font-medium md:flex">
           <Link
             to="/explorar"
-            search={{ q: "", vibe: "todos" }}
-            className="text-muted-foreground hover:text-foreground"
-            activeProps={{ className: "text-foreground" }}
+            className="rounded-full px-3 py-1.5 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            activeProps={{ className: "rounded-full px-3 py-1.5 bg-muted text-foreground font-semibold" }}
           >
             Explorar
           </Link>
@@ -32,29 +31,23 @@ export function Navbar() {
 
         <form
           onSubmit={onSearch}
-          className="group relative hidden flex-1 items-center gap-2 rounded-full border border-foreground bg-background px-4 py-1.5 shadow-[3px_3px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5 focus-within:shadow-[4px_4px_0_0_oklch(0.2_0_0)] sm:flex md:max-w-xl"
+          className="relative hidden flex-1 items-center gap-1.5 rounded-full border border-border bg-muted/50 px-3 py-1 transition focus-within:border-foreground focus-within:bg-background sm:flex md:max-w-sm"
         >
-          <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+          <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Busca conciertos, mercadillos…"
-            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            placeholder="Buscar planes…"
+            className="w-full bg-transparent py-1 text-sm outline-none placeholder:text-muted-foreground"
           />
-          <button
-            type="submit"
-            className="hidden shrink-0 rounded-full bg-foreground px-3 py-1 text-xs font-semibold text-background sm:inline-block"
-          >
-            Buscar
-          </button>
         </form>
 
         <Link
           to="/crear"
           className="hidden items-center gap-1.5 rounded-full bg-[color:var(--brand-yellow)] px-3.5 py-2 text-sm font-bold text-foreground transition hover:-translate-y-0.5 sm:inline-flex"
         >
-          <Plus className="h-4 w-4" /> Subir
+          <Plus className="h-4 w-4" /> Subir plan
         </Link>
 
         <nav className="flex items-center gap-1.5 text-sm font-medium md:gap-2">

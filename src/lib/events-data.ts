@@ -173,7 +173,7 @@ export const events: AppEvent[] = [
     title: "Maratón de Warhammer en Alcazaba Juegos",
     description:
       "Torneo abierto de Warhammer 40k. Apúntate solo o en pareja, hay premios para los tres primeros.",
-    image: "https://images.unsplash.com/photo-1606503153255-59d8b8b80176?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "10:00",
     location: "Alcazaba Juegos",
