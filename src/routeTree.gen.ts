@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as GuardadosRouteImport } from './routes/guardados'
 import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as CrearRouteImport } from './routes/crear'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventoIdRouteImport } from './routes/evento.$id'
@@ -56,6 +57,11 @@ const CrearRoute = CrearRouteImport.update({
   path: '/crear',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -80,6 +86,7 @@ const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/contacto': typeof ContactoRoute
   '/crear': typeof CrearRoute
   '/explorar': typeof ExplorarRoute
   '/guardados': typeof GuardadosRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/contacto': typeof ContactoRoute
   '/crear': typeof CrearRoute
   '/explorar': typeof ExplorarRoute
   '/guardados': typeof GuardadosRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/contacto': typeof ContactoRoute
   '/crear': typeof CrearRoute
   '/explorar': typeof ExplorarRoute
   '/guardados': typeof GuardadosRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/contacto'
     | '/crear'
     | '/explorar'
     | '/guardados'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/contacto'
     | '/crear'
     | '/explorar'
     | '/guardados'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/contacto'
     | '/crear'
     | '/explorar'
     | '/guardados'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  ContactoRoute: typeof ContactoRoute
   CrearRoute: typeof CrearRoute
   ExplorarRoute: typeof ExplorarRoute
   GuardadosRoute: typeof GuardadosRoute
@@ -224,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrearRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -258,6 +278,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  ContactoRoute: ContactoRoute,
   CrearRoute: CrearRoute,
   ExplorarRoute: ExplorarRoute,
   GuardadosRoute: GuardadosRoute,

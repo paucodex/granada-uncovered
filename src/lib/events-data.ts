@@ -65,7 +65,7 @@ export const events: AppEvent[] = [
     title: "Paseo por el Parque Federico García Lorca",
     description:
       "Un paseo tranquilo por uno de los parques más bonitos de Granada. Quedamos a la entrada y caminamos sin prisa, comentando lo que vemos.",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1444930694458-01babe71870e?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "10:30",
     location: "Parque Federico García Lorca",
@@ -82,7 +82,7 @@ export const events: AppEvent[] = [
     title: "Senderismo en Los Cahorros",
     description:
       "Ruta clásica por Los Cahorros de Monachil. Puentes colgantes, río y desayuno en grupo al volver.",
-    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1454942901704-3c44c11b2ad1?w=1200&q=80",
     date: "Dom 27 abr",
     time: "09:00",
     location: "Monachil",
@@ -173,7 +173,7 @@ export const events: AppEvent[] = [
     title: "Maratón de Warhammer en Alcazaba Juegos",
     description:
       "Torneo abierto de Warhammer 40k. Apúntate solo o en pareja, hay premios para los tres primeros.",
-    image: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "10:00",
     location: "Alcazaba Juegos",
@@ -191,7 +191,7 @@ export const events: AppEvent[] = [
     title: "FicZone en Armilla",
     description:
       "El gran salón del cómic, manga, videojuegos y cultura pop de Granada. Invitados, concursos cosplay y mucho más.",
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=1200&q=80",
     date: "Sáb 3 may",
     time: "10:00",
     location: "Palacio de Ferias",
@@ -211,7 +211,7 @@ export const events: AppEvent[] = [
     title: "Taller de cerámica + brunch",
     description:
       "Aprende a tornear tu primera pieza mientras desayunas tortitas. Plazas muy limitadas.",
-    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=1200&q=80",
     date: "Dom 27 abr",
     time: "11:00",
     location: "Estudio Barro",
@@ -247,7 +247,7 @@ export const events: AppEvent[] = [
     title: "Mercado de artesanía en San Nicolás",
     description:
       "Más de 20 puestos de artesanía local con vistas a la Alhambra. Música en directo al atardecer.",
-    image: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "11:00",
     location: "Mirador San Nicolás",
@@ -283,7 +283,7 @@ export const events: AppEvent[] = [
     title: "Micro abierto en Realejo",
     description:
       "Si tienes algo que contar, cantar o recitar, este es tu sitio. Apúntate al llegar.",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1200&q=80",
     date: "Mié 23 abr",
     time: "21:30",
     location: "Café Sociedad",
@@ -300,7 +300,7 @@ export const events: AppEvent[] = [
     title: "Exposición en centro cultural",
     description:
       "Muestra colectiva de fotografía documental sobre los barrios de Granada. Entrada libre.",
-    image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80",
     date: "Hasta 15 may",
     time: "10:00 – 20:00",
     location: "Centro Cultural Gran Capitán",
