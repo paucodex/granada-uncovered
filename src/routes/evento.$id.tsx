@@ -164,6 +164,15 @@ function EventDetail() {
                     <ExternalLink className="h-4 w-4" /> Fuente
                   </a>
                 )}
+                {user && event.createdBy === user.id && (
+                  <Link
+                    to="/editar/$id"
+                    params={{ id: event.id }}
+                    className="inline-flex items-center gap-2 rounded-full border-2 border-dashed border-border px-5 py-3 text-sm font-semibold text-muted-foreground hover:border-foreground hover:text-foreground transition"
+                  >
+                    Editar plan
+                  </Link>
+                )}
               </div>
             </div>
           </div>
