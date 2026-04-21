@@ -145,11 +145,53 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
   );
   const initials = (visibleLabel || "?").slice(0, 2).toUpperCase();
 
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleAvatarUpload = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      toast.error("El archivo tiene que ser una imagen.");
+      return;
+    }
+    if (file.size > 3 * 1024 * 1024) {
+      toast.error("Máximo 3 MB.");
+      return;
+    }
+    setUploading(true);
+    const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+    const path = `${userId}/avatar-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, {
+      cacheControl: "3600",
+      upsert: true,
+      contentType: file.type,
+    });
+    if (upErr) {
+      setUploading(false);
+      toast.error("No pudimos subir la imagen.");
+      return;
+    }
+    const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+    const publicUrl = pub.publicUrl;
+    const { error: updErr } = await supabase
+      .from("profiles")
+      .update({ avatar_url: publicUrl })
+      .eq("user_id", userId);
+    setUploading(false);
+    if (updErr) {
+      toast.error("Imagen subida, pero no pudimos guardarla en tu perfil.");
+      return;
+    }
+    setAvatarUrl(publicUrl);
+    await refresh();
+    notifyProfileChanged();
+    toast.success("Avatar actualizado ✦");
+  };
+
   return (
     <section className="mt-8 rounded-3xl border-2 border-foreground bg-card p-6 shadow-[6px_6px_0_0_var(--foreground)] md:p-8">
       <div className="flex items-center gap-5">
         <div
-          className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border-2 border-foreground bg-[color:var(--brand-yellow)] font-display text-2xl font-extrabold"
+          className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border-2 border-foreground bg-[color:var(--brand-yellow)] font-display text-2xl font-extrabold"
           style={{ boxShadow: "3px 3px 0 var(--foreground)" }}
         >
           {avatarUrl ? (
@@ -165,7 +207,7 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             initials
           )}
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <p className="truncate font-display text-xl font-extrabold leading-tight">
             {visibleLabel}
           </p>
@@ -175,6 +217,28 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             </p>
           )}
           <p className="mt-0.5 truncate text-xs text-muted-foreground">{email}</p>
+          <div className="mt-2">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) handleAvatarUpload(f);
+                e.target.value = "";
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploading}
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-foreground bg-background px-3 py-1.5 text-xs font-bold transition hover:-translate-y-0.5 disabled:opacity-60"
+            >
+              <Upload className="h-3.5 w-3.5" />
+              {uploading ? "Subiendo…" : avatarUrl ? "Cambiar avatar" : "Subir avatar"}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -197,10 +261,10 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             error={errors.username}
           />
           <Field
-            label="URL de tu avatar"
+            label="O pega una URL de avatar (opcional)"
             value={avatarUrl}
             onChange={setAvatarUrl}
-            placeholder="https://… (opcional)"
+            placeholder="https://…"
             error={errors.avatar_url}
           />
 

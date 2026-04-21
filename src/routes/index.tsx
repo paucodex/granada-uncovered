@@ -7,7 +7,8 @@ import { Categories } from "@/components/Categories";
 import { UploadCTA } from "@/components/UploadCTA";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
-import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
+import { useEffect, useState } from "react";
+import { getThisWeekEvents, getDiscoveryEvents, type AppEvent } from "@/lib/events-data";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -29,6 +30,16 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  // Initialize with the SSR-friendly snapshot, then refresh on client to include
+  // user-created events from localStorage.
+  const [thisWeek, setThisWeek] = useState<AppEvent[]>(() => getThisWeekEvents());
+  const [discovery, setDiscovery] = useState<AppEvent[]>(() => getDiscoveryEvents());
+
+  useEffect(() => {
+    setThisWeek(getThisWeekEvents());
+    setDiscovery(getDiscoveryEvents());
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
@@ -51,7 +62,7 @@ function Index() {
             Esta <span className="mark-yellow">semana</span> en Granada
           </SectionHeader>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {thisWeekEvents.map((e) => (
+            {thisWeek.map((e) => (
               <EventCard key={e.id} event={e} />
             ))}
           </div>
@@ -67,7 +78,7 @@ function Index() {
               ?
             </SectionHeader>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {discoveryEvents.map((e) => (
+              {discovery.map((e) => (
                 <EventCard key={e.id} event={e} />
               ))}
             </div>
