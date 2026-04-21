@@ -20,6 +20,7 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventoIdRouteImport } from './routes/evento.$id'
+import { Route as EditarIdRouteImport } from './routes/editar.$id'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -77,6 +78,11 @@ const EventoIdRoute = EventoIdRouteImport.update({
   path: '/evento/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EditarIdRoute = EditarIdRouteImport.update({
+  id: '/editar/$id',
+  path: '/editar/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
   id: '/categoria/$slug',
   path: '/categoria/$slug',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof PerfilRoute
   '/register': typeof RegisterRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/editar/$id': typeof EditarIdRoute
   '/evento/$id': typeof EventoIdRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/perfil': typeof PerfilRoute
   '/register': typeof RegisterRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/editar/$id': typeof EditarIdRoute
   '/evento/$id': typeof EventoIdRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/perfil': typeof PerfilRoute
   '/register': typeof RegisterRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/editar/$id': typeof EditarIdRoute
   '/evento/$id': typeof EventoIdRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/register'
     | '/categoria/$slug'
+    | '/editar/$id'
     | '/evento/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/register'
     | '/categoria/$slug'
+    | '/editar/$id'
     | '/evento/$id'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/register'
     | '/categoria/$slug'
+    | '/editar/$id'
     | '/evento/$id'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   PerfilRoute: typeof PerfilRoute
   RegisterRoute: typeof RegisterRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
+  EditarIdRoute: typeof EditarIdRoute
   EventoIdRoute: typeof EventoIdRoute
 }
 
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventoIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/editar/$id': {
+      id: '/editar/$id'
+      path: '/editar/$id'
+      fullPath: '/editar/$id'
+      preLoaderRoute: typeof EditarIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/categoria/$slug': {
       id: '/categoria/$slug'
       path: '/categoria/$slug'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   PerfilRoute: PerfilRoute,
   RegisterRoute: RegisterRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
+  EditarIdRoute: EditarIdRoute,
   EventoIdRoute: EventoIdRoute,
 }
 export const routeTree = rootRouteImport
