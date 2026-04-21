@@ -65,7 +65,7 @@ function GuardadosPage() {
             <p className="text-muted-foreground">Aún no has guardado ningún plan.</p>
             <Link
               to="/explorar"
-              search={{ q: "", vibe: "todos" }}
+              
               className="mt-5 inline-block rounded-full bg-[color:var(--brand-blue)] px-5 py-2.5 text-sm font-semibold text-white"
             >
               Explorar planes →

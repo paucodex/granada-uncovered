@@ -23,7 +23,6 @@ export function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               to="/explorar"
-              search={{ q: "", vibe: "todos" }}
               className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-blue)] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_oklch(0.58_0.22_263/0.55)] transition hover:-translate-y-0.5"
             >
               Cotillea qué está pasando →
@@ -32,7 +31,7 @@ export function Hero() {
               to="/crear"
               className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-5 py-3 text-sm font-semibold transition hover:bg-foreground hover:text-background"
             >
-              Subir planes
+              Subir plan
             </Link>
           </div>
         </div>

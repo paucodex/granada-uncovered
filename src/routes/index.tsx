@@ -25,14 +25,6 @@ export const Route = createFileRoute("/")({
         content: "Lo que está pasando en Granada de verdad. Súbete al feed de la ciudad.",
       },
     ],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&display=swap",
-      },
-    ],
   }),
 });
 
@@ -50,7 +42,6 @@ function Index() {
             cta={
               <Link
                 to="/explorar"
-                search={{ q: "", vibe: "todos" }}
                 className="text-sm font-semibold underline-offset-4 hover:underline"
               >
                 Ver toda la agenda →

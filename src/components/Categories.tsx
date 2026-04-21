@@ -6,7 +6,7 @@ export type CategoryFilter = Vibe | "Todos";
 interface CategoriesProps {
   active?: CategoryFilter;
   onSelect?: (category: CategoryFilter) => void;
-  /** Si true, los chips navegan a /categoria/:slug (o /explorar para Todos) */
+  /** Si true, los chips navegan a /explorar?vibe=:slug */
   asLinks?: boolean;
 }
 
@@ -32,8 +32,8 @@ export function Categories({ active = "Todos", onSelect, asLinks = false }: Cate
               return (
                 <Link
                   key={c.name}
-                  to={c.name === "Todos" ? "/explorar" : "/categoria/$slug"}
-                  params={c.name === "Todos" ? undefined : { slug: c.slug }}
+                  to="/explorar"
+                  search={{ vibe: c.slug === "todos" ? undefined : c.slug }}
                   className={className}
                   style={style}
                 >
@@ -51,8 +51,8 @@ export function Categories({ active = "Todos", onSelect, asLinks = false }: Cate
                   if (onSelect) onSelect(c.name);
                   else {
                     navigate({
-                      to: c.name === "Todos" ? "/explorar" : "/categoria/$slug",
-                      params: c.name === "Todos" ? undefined : { slug: c.slug },
+                      to: "/explorar",
+                      search: { vibe: c.slug === "todos" ? undefined : c.slug },
                     });
                   }
                 }}
