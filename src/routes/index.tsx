@@ -7,7 +7,8 @@ import { Categories } from "@/components/Categories";
 import { UploadCTA } from "@/components/UploadCTA";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
-import { thisWeekEvents, discoveryEvents } from "@/lib/events-data";
+import { useEffect, useState } from "react";
+import { getThisWeekEvents, getDiscoveryEvents, type AppEvent } from "@/lib/events-data";
 
 export const Route = createFileRoute("/")({
   component: Index,
