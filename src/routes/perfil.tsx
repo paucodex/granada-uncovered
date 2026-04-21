@@ -261,10 +261,10 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             error={errors.username}
           />
           <Field
-            label="URL de tu avatar"
+            label="O pega una URL de avatar (opcional)"
             value={avatarUrl}
             onChange={setAvatarUrl}
-            placeholder="https://… (opcional)"
+            placeholder="https://…"
             error={errors.avatar_url}
           />
 
