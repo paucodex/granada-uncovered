@@ -81,31 +81,20 @@ function ExplorarPage() {
 
         <section className="border-b border-border bg-background py-8">
           <div className="mx-auto max-w-7xl px-4 md:px-8">
-            <p className="mb-4 text-sm font-medium text-muted-foreground">Filtra por vibe →</p>
+            <p className="mb-4 text-sm font-medium text-muted-foreground">Salta a una vibe →</p>
             <div className="flex flex-wrap gap-3">
-              {VIBES.map((c) => {
-                const isActive = activeVibe === c.name;
-                return (
-                  <Link
-                    key={c.name}
-                    to="/explorar"
-                    search={{
-                      q: q || undefined,
-                      vibe: c.slug === "todos" ? undefined : c.slug,
-                    }}
-                    className={`flex items-center gap-2 rounded-full border-2 border-foreground px-4 py-2 text-sm font-bold transition-all hover:-translate-y-0.5 ${
-                      isActive ? "-translate-y-0.5 text-background" : "bg-background text-foreground"
-                    }`}
-                    style={{
-                      boxShadow: isActive ? `2px 2px 0 var(--foreground)` : `3px 3px 0 ${c.color}`,
-                      backgroundColor: isActive ? c.color : undefined,
-                    }}
-                  >
-                    <span>{c.emoji}</span>
-                    {c.name}
-                  </Link>
-                );
-              })}
+              {VIBES.filter((c) => c.name !== "Todos").map((c) => (
+                <Link
+                  key={c.name}
+                  to="/categoria/$slug"
+                  params={{ slug: c.slug }}
+                  className="flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-4 py-2 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5"
+                  style={{ boxShadow: `3px 3px 0 ${c.color}` }}
+                >
+                  <span>{c.emoji}</span>
+                  {c.name}
+                </Link>
+              ))}
             </div>
           </div>
         </section>
