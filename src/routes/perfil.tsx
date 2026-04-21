@@ -177,9 +177,16 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             initials
           )}
         </div>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Email</p>
-          <p className="font-semibold">{email}</p>
+        <div className="min-w-0">
+          <p className="truncate font-display text-xl font-extrabold leading-tight">
+            {displayName || username || email.split("@")[0]}
+          </p>
+          {username && (
+            <p className="text-sm font-semibold text-[color:var(--brand-blue)]">
+              @{username}
+            </p>
+          )}
+          <p className="mt-0.5 truncate text-xs text-muted-foreground">{email}</p>
         </div>
       </div>
 
