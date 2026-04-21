@@ -20,7 +20,7 @@ export const Route = createFileRoute("/evento/$id")({
       <Navbar />
       <div className="mx-auto max-w-3xl px-4 py-24 text-center">
         <h1 className="font-display text-4xl font-extrabold">Evento no encontrado</h1>
-        <Link to="/explorar" search={{ q: "", vibe: "todos" }} className="mt-6 inline-block text-[color:var(--brand-blue)] underline">
+        <Link to="/explorar"  className="mt-6 inline-block text-[color:var(--brand-blue)] underline">
           Ver otros planes
         </Link>
       </div>
@@ -80,7 +80,7 @@ function EventDetail() {
         <div className="mx-auto max-w-5xl px-4 pt-6 md:px-8">
           <Link
             to="/explorar"
-            search={{ q: "", vibe: "todos" }}
+            
             className="text-sm text-muted-foreground hover:text-foreground"
           >
             ← Volver a explorar
