@@ -23,6 +23,13 @@ export function saveUserEvent(event: AppEvent): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
 }
 
+export function deleteUserEvent(id: string): void {
+  if (typeof window === "undefined") return;
+  const all = getUserEvents();
+  const next = all.filter((e) => e.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+}
+
 export function getUserEventsByCreator(userId: string): AppEvent[] {
   return getUserEvents().filter((e) => e.createdBy === userId);
 }
