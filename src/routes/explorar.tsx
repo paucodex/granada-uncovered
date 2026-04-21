@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventCard } from "@/components/EventCard";
+import { UploadCTA } from "@/components/UploadCTA";
 import { VIBES, eventsByVibe, searchEvents, vibeBySlug, type Vibe } from "@/lib/events-data";
 
 type ExplorarSearch = { q?: string; vibe?: string };
@@ -45,10 +46,10 @@ function ExplorarPage() {
         <section className="border-b border-border bg-background py-10 md:py-14">
           <div className="mx-auto max-w-5xl px-4 md:px-8">
             <h1 className="font-display text-4xl font-extrabold leading-[1] tracking-tight md:text-5xl">
-              Explora <span className="mark-yellow">Granada</span>
+              Explora y <span className="mark-yellow">entérate</span>
             </h1>
             <p className="mt-3 max-w-xl text-base text-muted-foreground">
-              Descubre lo que está pasando en Granada — aunque no salga en Google.
+              Cotillea qué está pasando por Granada — pa' que te enteres de to' 👀
             </p>
 
             <form
@@ -124,25 +125,8 @@ function ExplorarPage() {
           )}
         </section>
 
-        {/* Final CTA */}
-        <section className="border-t border-border bg-[oklch(0.97_0.008_90)] py-16 md:py-20">
-          <div className="mx-auto max-w-3xl px-4 text-center md:px-8">
-            <h2 className="font-display text-3xl font-extrabold leading-[1.05] tracking-tight md:text-4xl">
-              ¿Te has enterao de algo
-              <br className="hidden md:block" />
-              {" "}que <span className="italic underline decoration-[color:var(--brand-coral)] decoration-4 underline-offset-8">el resto no</span>?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
-              Súbelo. Seguro que alguien más quiere saberlo.
-            </p>
-            <Link
-              to="/crear"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-base font-extrabold text-background transition hover:-translate-y-1"
-            >
-              Cuéntalo →
-            </Link>
-          </div>
-        </section>
+        {/* Final CTA — same visual language as home */}
+        <UploadCTA />
       </main>
       <Footer />
     </div>
