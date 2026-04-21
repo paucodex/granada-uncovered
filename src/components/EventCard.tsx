@@ -45,11 +45,6 @@ export function EventCard({ event }: { event: EventItem }) {
 
   return (
     <article className="card-lift group relative overflow-hidden rounded-2xl border border-border bg-card">
-      {event.featured && (
-        <span className="absolute left-4 top-4 z-20 rotate-[-4deg] rounded-md bg-foreground px-2 py-1 text-[10px] font-extrabold uppercase tracking-wider text-[color:var(--brand-yellow)] shadow-md">
-          ✦ lo viste aquí primero
-        </span>
-      )}
       <div className="relative aspect-[5/4] overflow-hidden bg-muted">
         <img
           src={event.image}
@@ -74,6 +69,11 @@ export function EventCard({ event }: { event: EventItem }) {
       </div>
 
       <div className="p-5">
+        {event.featured && (
+          <span className="mb-3 inline-flex rotate-[-2deg] rounded-md bg-foreground px-2 py-1 text-[10px] font-extrabold uppercase tracking-wider text-[color:var(--brand-yellow)]">
+            ✦ lo viste aquí primero
+          </span>
+        )}
         <h3 className="font-display text-lg font-bold leading-snug">{event.title}</h3>
 
         <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
