@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Navbar } from "@/components/Navbar";
-import { SearchBar } from "@/components/SearchBar";
 import { Hero } from "@/components/Hero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { EventCard } from "@/components/EventCard";
@@ -60,7 +59,6 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
-      <SearchBar />
       <main>
         <Hero />
         <Categories active={selectedCategory} onSelect={setSelectedCategory} />
