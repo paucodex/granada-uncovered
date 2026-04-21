@@ -16,7 +16,7 @@ export function Navbar() {
 
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="group relative mx-2 hidden flex-1 items-center gap-2 rounded-full border-2 border-foreground bg-background px-4 py-1.5 shadow-[3px_3px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5 focus-within:shadow-[4px_4px_0_0_oklch(0.2_0_0)] sm:flex md:max-w-md"
+          className="group relative mx-2 hidden flex-1 items-center gap-2 rounded-full border-foreground bg-background px-4 py-1.5 shadow-[3px_3px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5 focus-within:shadow-[4px_4px_0_0_oklch(0.2_0_0)] sm:flex md:max-w-md border"
         >
           <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
           <input

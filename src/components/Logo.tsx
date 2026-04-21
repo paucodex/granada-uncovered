@@ -1,6 +1,6 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <a href="/" className={`font-display text-2xl font-extrabold tracking-tight ${className}`}>
+    <a href="/" className={`font-display font-extrabold tracking-tight text-3xl ${className}`}>
       EN<span className="mark-yellow">TÉ</span>RATE
     </a>
   );
