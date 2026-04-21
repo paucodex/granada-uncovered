@@ -349,7 +349,20 @@ export function searchEvents(q: string): AppEvent[] {
 }
 
 export function getEvent(id: string): AppEvent | undefined {
-  return events.find((e) => e.id === id || e.slug === id);
+  const fromMock = events.find((e) => e.id === id || e.slug === id);
+  if (fromMock) return fromMock;
+  if (typeof window !== "undefined") {
+    try {
+      const raw = window.localStorage.getItem("enterate.user_events.v1");
+      if (raw) {
+        const list = JSON.parse(raw) as AppEvent[];
+        return list.find((e) => e.id === id || e.slug === id);
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  return undefined;
 }
 
 // Subconjuntos para la home (preservar la estructura visual actual)
