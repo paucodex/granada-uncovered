@@ -9,9 +9,53 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as MisEventosRouteImport } from './routes/mis-eventos'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as GuardadosRouteImport } from './routes/guardados'
+import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as CrearRouteImport } from './routes/crear'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventoIdRouteImport } from './routes/evento.$id'
+import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MisEventosRoute = MisEventosRouteImport.update({
+  id: '/mis-eventos',
+  path: '/mis-eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuardadosRoute = GuardadosRouteImport.update({
+  id: '/guardados',
+  path: '/guardados',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplorarRoute = ExplorarRouteImport.update({
+  id: '/explorar',
+  path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrearRoute = CrearRouteImport.update({
+  id: '/crear',
+  path: '/crear',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -22,35 +66,164 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventoIdRoute = EventoIdRouteImport.update({
+  id: '/evento/$id',
+  path: '/evento/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
+  id: '/categoria/$slug',
+  path: '/categoria/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/crear': typeof CrearRoute
+  '/explorar': typeof ExplorarRoute
+  '/guardados': typeof GuardadosRoute
+  '/login': typeof LoginRoute
+  '/mis-eventos': typeof MisEventosRoute
+  '/perfil': typeof PerfilRoute
+  '/register': typeof RegisterRoute
+  '/categoria/$slug': typeof CategoriaSlugRoute
+  '/evento/$id': typeof EventoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/crear': typeof CrearRoute
+  '/explorar': typeof ExplorarRoute
+  '/guardados': typeof GuardadosRoute
+  '/login': typeof LoginRoute
+  '/mis-eventos': typeof MisEventosRoute
+  '/perfil': typeof PerfilRoute
+  '/register': typeof RegisterRoute
+  '/categoria/$slug': typeof CategoriaSlugRoute
+  '/evento/$id': typeof EventoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/crear': typeof CrearRoute
+  '/explorar': typeof ExplorarRoute
+  '/guardados': typeof GuardadosRoute
+  '/login': typeof LoginRoute
+  '/mis-eventos': typeof MisEventosRoute
+  '/perfil': typeof PerfilRoute
+  '/register': typeof RegisterRoute
+  '/categoria/$slug': typeof CategoriaSlugRoute
+  '/evento/$id': typeof EventoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/crear'
+    | '/explorar'
+    | '/guardados'
+    | '/login'
+    | '/mis-eventos'
+    | '/perfil'
+    | '/register'
+    | '/categoria/$slug'
+    | '/evento/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth'
-  id: '__root__' | '/' | '/auth'
+  to:
+    | '/'
+    | '/auth'
+    | '/crear'
+    | '/explorar'
+    | '/guardados'
+    | '/login'
+    | '/mis-eventos'
+    | '/perfil'
+    | '/register'
+    | '/categoria/$slug'
+    | '/evento/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/crear'
+    | '/explorar'
+    | '/guardados'
+    | '/login'
+    | '/mis-eventos'
+    | '/perfil'
+    | '/register'
+    | '/categoria/$slug'
+    | '/evento/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  CrearRoute: typeof CrearRoute
+  ExplorarRoute: typeof ExplorarRoute
+  GuardadosRoute: typeof GuardadosRoute
+  LoginRoute: typeof LoginRoute
+  MisEventosRoute: typeof MisEventosRoute
+  PerfilRoute: typeof PerfilRoute
+  RegisterRoute: typeof RegisterRoute
+  CategoriaSlugRoute: typeof CategoriaSlugRoute
+  EventoIdRoute: typeof EventoIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mis-eventos': {
+      id: '/mis-eventos'
+      path: '/mis-eventos'
+      fullPath: '/mis-eventos'
+      preLoaderRoute: typeof MisEventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guardados': {
+      id: '/guardados'
+      path: '/guardados'
+      fullPath: '/guardados'
+      preLoaderRoute: typeof GuardadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explorar': {
+      id: '/explorar'
+      path: '/explorar'
+      fullPath: '/explorar'
+      preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crear': {
+      id: '/crear'
+      path: '/crear'
+      fullPath: '/crear'
+      preLoaderRoute: typeof CrearRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -65,12 +238,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evento/$id': {
+      id: '/evento/$id'
+      path: '/evento/$id'
+      fullPath: '/evento/$id'
+      preLoaderRoute: typeof EventoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categoria/$slug': {
+      id: '/categoria/$slug'
+      path: '/categoria/$slug'
+      fullPath: '/categoria/$slug'
+      preLoaderRoute: typeof CategoriaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  CrearRoute: CrearRoute,
+  ExplorarRoute: ExplorarRoute,
+  GuardadosRoute: GuardadosRoute,
+  LoginRoute: LoginRoute,
+  MisEventosRoute: MisEventosRoute,
+  PerfilRoute: PerfilRoute,
+  RegisterRoute: RegisterRoute,
+  CategoriaSlugRoute: CategoriaSlugRoute,
+  EventoIdRoute: EventoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
