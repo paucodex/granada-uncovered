@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -69,15 +69,86 @@ function PerfilPage() {
           </Link>
         </div>
 
-        <button
-          onClick={() => signOut()}
-          className="mt-10 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:border-foreground hover:text-foreground"
-        >
-          Cerrar sesión
-        </button>
+        <div className="mt-10 flex flex-wrap items-center gap-3">
+          <button
+            onClick={() => signOut()}
+            className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:border-foreground hover:text-foreground"
+          >
+            Cerrar sesión
+          </button>
+          <DeleteAccountButton onAfterDelete={signOut} />
+        </div>
       </main>
       <Footer />
     </div>
+  );
+}
+
+function DeleteAccountButton({ onAfterDelete }: { onAfterDelete: () => Promise<void> }) {
+  const [open, setOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      const { error } = await supabase.functions.invoke("delete-account");
+      if (error) {
+        toast.error("No pudimos eliminar la cuenta. Inténtalo otra vez.");
+        setDeleting(false);
+        return;
+      }
+      await onAfterDelete().catch(() => {});
+      toast.success("Cuenta eliminada");
+      navigate({ to: "/" });
+    } catch {
+      toast.error("No pudimos eliminar la cuenta. Inténtalo otra vez.");
+      setDeleting(false);
+    }
+  };
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="rounded-full border border-[color:var(--brand-coral)] px-5 py-2.5 text-sm font-semibold text-[color:var(--brand-coral)] hover:bg-[color:var(--brand-coral)] hover:text-background"
+      >
+        Eliminar cuenta
+      </button>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-black/50 px-4"
+          onClick={() => !deleting && setOpen(false)}
+        >
+          <div
+            className="w-full max-w-md rounded-3xl border-2 border-foreground bg-card p-6 shadow-[6px_6px_0_0_var(--foreground)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="font-display text-2xl font-extrabold">¿Eliminar tu cuenta?</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Esta acción es permanente. Perderás el acceso al instante y no podrás recuperar tu cuenta.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-end gap-3">
+              <button
+                onClick={() => setOpen(false)}
+                disabled={deleting}
+                className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-muted-foreground hover:border-foreground hover:text-foreground disabled:opacity-60"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="rounded-full bg-[color:var(--brand-coral)] px-5 py-2.5 text-sm font-extrabold text-background transition hover:-translate-y-0.5 disabled:opacity-60"
+              >
+                {deleting ? "Eliminando…" : "Sí, eliminar"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
