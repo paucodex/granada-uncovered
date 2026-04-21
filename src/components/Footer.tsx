@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 
 export function Footer() {
@@ -11,9 +12,11 @@ export function Footer() {
           </p>
         </div>
         <div className="flex gap-6 text-sm font-medium">
-          <a href="#" className="hover:text-[color:var(--brand-blue)]">Sobre</a>
-          <a href="#" className="hover:text-[color:var(--brand-blue)]">Instagram</a>
-          <a href="#" className="hover:text-[color:var(--brand-blue)]">Contacto</a>
+          <span className="text-muted-foreground">Sobre</span>
+          <span className="text-muted-foreground">Instagram</span>
+          <Link to="/contacto" className="hover:text-[color:var(--brand-blue)]">
+            Contacto
+          </Link>
         </div>
       </div>
     </footer>
