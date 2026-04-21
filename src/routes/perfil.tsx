@@ -260,13 +260,8 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             placeholder="alias_sin_espacios"
             error={errors.username}
           />
-          <Field
-            label="O pega una URL de avatar (opcional)"
-            value={avatarUrl}
-            onChange={setAvatarUrl}
-            placeholder="https://…"
-            error={errors.avatar_url}
-          />
+          {/* URL de avatar oculta — la subida directa es la vía principal.
+              Se mantiene en estado por si se necesita como fallback interno. */}
 
           <div className="flex items-center gap-3 pt-2">
             <button
