@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { Pencil, Trash2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventCard } from "@/components/EventCard";
 import { useAuth } from "@/auth/AuthProvider";
-import { getUserEventsByCreator } from "@/lib/user-events";
+import { getUserEventsByCreator, deleteUserEvent } from "@/lib/user-events";
 import type { AppEvent } from "@/lib/events-data";
 
 export const Route = createFileRoute("/mis-eventos")({
@@ -15,10 +17,18 @@ export const Route = createFileRoute("/mis-eventos")({
 function MisEventosPage() {
   const { user, loading } = useAuth();
   const [mine, setMine] = useState<AppEvent[]>([]);
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   useEffect(() => {
     if (user) setMine(getUserEventsByCreator(user.id));
   }, [user]);
+
+  const onDelete = (id: string) => {
+    deleteUserEvent(id);
+    setMine((prev) => prev.filter((e) => e.id !== id));
+    setConfirmId(null);
+    toast.success("Plan eliminado");
+  };
 
   if (loading) {
     return (
@@ -80,7 +90,42 @@ function MisEventosPage() {
         ) : (
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {mine.map((e) => (
-              <EventCard key={e.id} event={e} />
+              <div key={e.id} className="space-y-3">
+                <EventCard event={e} />
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/editar/$id"
+                    params={{ id: e.id }}
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border-2 border-foreground bg-background px-4 py-2 text-xs font-bold hover:bg-foreground hover:text-background transition"
+                  >
+                    <Pencil className="h-3.5 w-3.5" /> Editar
+                  </Link>
+                  {confirmId === e.id ? (
+                    <>
+                      <button
+                        onClick={() => onDelete(e.id)}
+                        className="inline-flex items-center gap-1 rounded-full bg-[color:var(--destructive,#ef4444)] px-3 py-2 text-xs font-bold text-white"
+                      >
+                        Confirmar
+                      </button>
+                      <button
+                        onClick={() => setConfirmId(null)}
+                        className="rounded-full border-2 border-border bg-background px-3 py-2 text-xs font-semibold"
+                      >
+                        No
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => setConfirmId(e.id)}
+                      aria-label="Eliminar plan"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-full border-2 border-[color:var(--destructive,#ef4444)] px-4 py-2 text-xs font-bold text-[color:var(--destructive,#ef4444)] hover:bg-[color:var(--destructive,#ef4444)] hover:text-white transition"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" /> Eliminar
+                    </button>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         )}
