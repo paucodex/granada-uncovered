@@ -3,9 +3,12 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { Logo } from "./Logo";
 import { useAuth } from "@/auth/AuthProvider";
+import { useProfile, profileLabel } from "@/auth/useProfile";
 
 export function Navbar() {
   const { user, signOut } = useAuth();
+  const { profile } = useProfile();
+  const label = profileLabel(profile, user?.email);
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
@@ -63,9 +66,12 @@ export function Navbar() {
               <Link
                 to="/perfil"
                 aria-label="Perfil"
-                className="grid h-9 w-9 place-items-center rounded-full border border-border hover:border-foreground"
+                className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-2.5 hover:border-foreground"
               >
                 <UserIcon className="h-4 w-4" />
+                <span className="hidden max-w-[120px] truncate text-xs font-semibold sm:inline">
+                  {label}
+                </span>
               </Link>
               <button
                 onClick={async () => {

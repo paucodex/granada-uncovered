@@ -5,20 +5,13 @@ import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useAuth } from "@/auth/AuthProvider";
+import { useProfile, notifyProfileChanged, profileLabel } from "@/auth/useProfile";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/perfil")({
   component: PerfilPage,
   head: () => ({ meta: [{ title: "Mi perfil — ENTÉRATE" }] }),
 });
-
-interface ProfileRow {
-  id: string;
-  user_id: string;
-  display_name: string | null;
-  username: string | null;
-  avatar_url: string | null;
-}
 
 const profileSchema = z.object({
   display_name: z.string().trim().min(2, "Mínimo 2 caracteres").max(60, "Máximo 60 caracteres"),
@@ -36,6 +29,9 @@ const profileSchema = z.object({
     .or(z.literal("")),
 });
 
+const emailSchema = z.string().trim().email("Ese email no parece válido").max(255);
+const passwordSchema = z.string().min(6, "Mínimo 6 caracteres").max(72, "Máximo 72 caracteres");
+
 function PerfilPage() {
   const { user, loading: authLoading, signOut } = useAuth();
 
@@ -52,6 +48,8 @@ function PerfilPage() {
         </p>
 
         <ProfileForm userId={user.id} email={user.email ?? ""} />
+
+        <AccountSettings currentEmail={user.email ?? ""} />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <Link
@@ -83,8 +81,7 @@ function PerfilPage() {
 }
 
 function ProfileForm({ userId, email }: { userId: string; email: string }) {
-  const [profile, setProfile] = useState<ProfileRow | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { profile, loading, refresh } = useProfile();
   const [saving, setSaving] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [username, setUsername] = useState("");
@@ -92,28 +89,12 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
   const [errors, setErrors] = useState<Partial<Record<"display_name" | "username" | "avatar_url", string>>>({});
 
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("id, user_id, display_name, username, avatar_url")
-        .eq("user_id", userId)
-        .maybeSingle();
-      if (cancelled) return;
-      if (error) {
-        toast.error("No pudimos cargar tu perfil.");
-      } else if (data) {
-        setProfile(data);
-        setDisplayName(data.display_name ?? "");
-        setUsername(data.username ?? "");
-        setAvatarUrl(data.avatar_url ?? "");
-      }
-      setLoading(false);
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [userId]);
+    if (profile) {
+      setDisplayName(profile.display_name ?? "");
+      setUsername(profile.username ?? "");
+      setAvatarUrl(profile.avatar_url ?? "");
+    }
+  }, [profile]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -152,10 +133,16 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
       }
       return;
     }
+    await refresh();
+    notifyProfileChanged();
     toast.success("Perfil actualizado ✦");
   };
 
-  const initials = (displayName || email || "?").slice(0, 2).toUpperCase();
+  const visibleLabel = profileLabel(
+    { ...(profile ?? { id: "", user_id: userId, display_name: null, username: null, avatar_url: null }), display_name: displayName || profile?.display_name || null, username: username || profile?.username || null },
+    email,
+  );
+  const initials = (visibleLabel || "?").slice(0, 2).toUpperCase();
 
   return (
     <section className="mt-8 rounded-3xl border-2 border-foreground bg-card p-6 shadow-[6px_6px_0_0_var(--foreground)] md:p-8">
@@ -179,11 +166,11 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
         </div>
         <div className="min-w-0">
           <p className="truncate font-display text-xl font-extrabold leading-tight">
-            {displayName || username || email.split("@")[0]}
+            {visibleLabel}
           </p>
-          {username && (
+          {(username || profile?.username) && (
             <p className="text-sm font-semibold text-[color:var(--brand-blue)]">
-              @{username}
+              @{username || profile?.username}
             </p>
           )}
           <p className="mt-0.5 truncate text-xs text-muted-foreground">{email}</p>
@@ -224,9 +211,6 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
             >
               {saving ? "Guardando…" : "Guardar cambios"}
             </button>
-            {profile?.username && (
-              <span className="text-xs text-muted-foreground">@{profile.username}</span>
-            )}
           </div>
         </form>
       )}
@@ -234,14 +218,150 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
   );
 }
 
+function AccountSettings({ currentEmail }: { currentEmail: string }) {
+  // Email
+  const [email, setEmail] = useState(currentEmail);
+  const [emailErr, setEmailErr] = useState<string | null>(null);
+  const [emailSaving, setEmailSaving] = useState(false);
+
+  // Password
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pwdErr, setPwdErr] = useState<string | null>(null);
+  const [pwdSaving, setPwdSaving] = useState(false);
+
+  useEffect(() => {
+    setEmail(currentEmail);
+  }, [currentEmail]);
+
+  const handleEmail = async (e: FormEvent) => {
+    e.preventDefault();
+    setEmailErr(null);
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
+      setEmailErr(parsed.error.issues[0]?.message ?? "Email inválido");
+      return;
+    }
+    if (parsed.data === currentEmail) {
+      setEmailErr("Ese ya es tu email actual.");
+      return;
+    }
+    setEmailSaving(true);
+    const { error } = await supabase.auth.updateUser({ email: parsed.data });
+    setEmailSaving(false);
+    if (error) {
+      const m = error.message.toLowerCase();
+      if (m.includes("already") || m.includes("registered") || m.includes("exists")) {
+        setEmailErr("Ese email ya está en uso por otra cuenta.");
+      } else if (m.includes("invalid")) {
+        setEmailErr("El email no parece válido.");
+      } else {
+        setEmailErr(error.message);
+      }
+      return;
+    }
+    toast.success("Te hemos enviado un correo para confirmar el nuevo email.");
+  };
+
+  const handlePassword = async (e: FormEvent) => {
+    e.preventDefault();
+    setPwdErr(null);
+    const parsed = passwordSchema.safeParse(newPassword);
+    if (!parsed.success) {
+      setPwdErr(parsed.error.issues[0]?.message ?? "Contraseña inválida");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPwdErr("Las contraseñas no coinciden.");
+      return;
+    }
+    setPwdSaving(true);
+    const { error } = await supabase.auth.updateUser({ password: parsed.data });
+    setPwdSaving(false);
+    if (error) {
+      const m = error.message.toLowerCase();
+      if (m.includes("same") || m.includes("different")) {
+        setPwdErr("La nueva contraseña tiene que ser distinta de la actual.");
+      } else if (m.includes("weak") || m.includes("at least")) {
+        setPwdErr("Esa contraseña es demasiado débil.");
+      } else {
+        setPwdErr(error.message);
+      }
+      return;
+    }
+    setNewPassword("");
+    setConfirmPassword("");
+    toast.success("Contraseña actualizada ✦");
+  };
+
+  return (
+    <section className="mt-10 rounded-3xl border-2 border-border bg-card p-6 md:p-8">
+      <h2 className="font-display text-2xl font-extrabold">Ajustes de cuenta</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Cambia tu email o tu contraseña. Estos cambios afectan a tu acceso.
+      </p>
+
+      <form onSubmit={handleEmail} noValidate className="mt-6 grid gap-3">
+        <Field
+          label="Email"
+          value={email}
+          onChange={setEmail}
+          placeholder="tu@email.com"
+          error={emailErr ?? undefined}
+        />
+        <div>
+          <button
+            type="submit"
+            disabled={emailSaving}
+            className="inline-flex items-center justify-center rounded-full border-2 border-foreground bg-background px-5 py-2.5 text-sm font-bold text-foreground transition hover:bg-foreground hover:text-background disabled:opacity-60"
+          >
+            {emailSaving ? "Enviando…" : "Cambiar email"}
+          </button>
+        </div>
+      </form>
+
+      <div className="my-8 h-px bg-border" />
+
+      <form onSubmit={handlePassword} noValidate className="grid gap-3">
+        <Field
+          label="Nueva contraseña"
+          type="password"
+          value={newPassword}
+          onChange={setNewPassword}
+          placeholder="Mínimo 6 caracteres"
+          error={pwdErr ?? undefined}
+        />
+        <Field
+          label="Repite la nueva contraseña"
+          type="password"
+          value={confirmPassword}
+          onChange={setConfirmPassword}
+          placeholder="Otra vez, pa' confirmar"
+        />
+        <div>
+          <button
+            type="submit"
+            disabled={pwdSaving}
+            className="inline-flex items-center justify-center rounded-full border-2 border-foreground bg-background px-5 py-2.5 text-sm font-bold text-foreground transition hover:bg-foreground hover:text-background disabled:opacity-60"
+          >
+            {pwdSaving ? "Guardando…" : "Cambiar contraseña"}
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
 function Field({
   label,
+  type = "text",
   value,
   onChange,
   placeholder,
   error,
 }: {
   label: string;
+  type?: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -251,7 +371,7 @@ function Field({
     <label className="flex flex-col gap-1.5 text-sm font-medium">
       {label}
       <input
-        type="text"
+        type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
