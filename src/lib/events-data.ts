@@ -82,7 +82,7 @@ export const events: AppEvent[] = [
     title: "Senderismo en Los Cahorros",
     description:
       "Ruta clásica por Los Cahorros de Monachil. Puentes colgantes, río y desayuno en grupo al volver.",
-    image: "https://images.unsplash.com/photo-1454942901704-3c44c11b2ad1?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=80",
     date: "Dom 27 abr",
     time: "09:00",
     location: "Monachil",
@@ -100,7 +100,7 @@ export const events: AppEvent[] = [
     title: "Yoga en Parque Tico Medina",
     description:
       "Clase de yoga al aire libre, todos los niveles. Trae tu esterilla y agua.",
-    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=1200&q=80",
     date: "Mar 22 abr",
     time: "19:00",
     location: "Parque Tico Medina",
@@ -118,7 +118,7 @@ export const events: AppEvent[] = [
     title: "Ruta de tapas escondidas",
     description:
       "Cuatro bares que casi nadie conoce, con la mejor relación tapa/precio del centro. Plazas limitadas.",
-    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80",
     date: "Mié 23 abr",
     time: "21:00",
     location: "Centro",
@@ -136,7 +136,7 @@ export const events: AppEvent[] = [
     title: "Cata de quesos en Carrera de la Virgen",
     description:
       "Cata guiada de 6 quesos andaluces con maridaje de vinos de la Alpujarra.",
-    image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=1200&q=80",
     date: "Jue 24 abr",
     time: "20:00",
     location: "Carrera de la Virgen",
@@ -154,7 +154,7 @@ export const events: AppEvent[] = [
     title: "Feria del vino",
     description:
       "Más de 30 bodegas pequeñas de Granada y alrededores. Copa incluida con la entrada.",
-    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "12:00",
     location: "Palacio de Congresos",
@@ -191,7 +191,7 @@ export const events: AppEvent[] = [
     title: "FicZone en Armilla",
     description:
       "El gran salón del cómic, manga, videojuegos y cultura pop de Granada. Invitados, concursos cosplay y mucho más.",
-    image: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&q=80",
     date: "Sáb 3 may",
     time: "10:00",
     location: "Palacio de Ferias",
@@ -211,7 +211,7 @@ export const events: AppEvent[] = [
     title: "Taller de cerámica + brunch",
     description:
       "Aprende a tornear tu primera pieza mientras desayunas tortitas. Plazas muy limitadas.",
-    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=1200&q=80",
     date: "Dom 27 abr",
     time: "11:00",
     location: "Estudio Barro",
@@ -229,7 +229,7 @@ export const events: AppEvent[] = [
     title: "Taller de anillos minimalistas en La Marimorena",
     description:
       "Diseña y forja tu propio anillo de plata. Te llevas la pieza puesta a casa.",
-    image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1200&q=80",
     date: "Vie 25 abr",
     time: "18:30",
     location: "La Marimorena",
@@ -247,7 +247,7 @@ export const events: AppEvent[] = [
     title: "Mercado de artesanía en San Nicolás",
     description:
       "Más de 20 puestos de artesanía local con vistas a la Alhambra. Música en directo al atardecer.",
-    image: "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1200&q=80",
     date: "Sáb 26 abr",
     time: "11:00",
     location: "Mirador San Nicolás",
@@ -265,7 +265,7 @@ export const events: AppEvent[] = [
     title: "Monólogo en bar del centro",
     description:
       "Noche de monólogos con cómicos locales. Consumición mínima.",
-    image: "https://images.unsplash.com/photo-1527224538127-2104bb71c51b?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=1200&q=80",
     date: "Jue 24 abr",
     time: "22:00",
     location: "Bar La Tertulia",
@@ -283,7 +283,7 @@ export const events: AppEvent[] = [
     title: "Micro abierto en Realejo",
     description:
       "Si tienes algo que contar, cantar o recitar, este es tu sitio. Apúntate al llegar.",
-    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
     date: "Mié 23 abr",
     time: "21:30",
     location: "Café Sociedad",
@@ -300,7 +300,7 @@ export const events: AppEvent[] = [
     title: "Exposición en centro cultural",
     description:
       "Muestra colectiva de fotografía documental sobre los barrios de Granada. Entrada libre.",
-    image: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1200&q=80",
     date: "Hasta 15 may",
     time: "10:00 – 20:00",
     location: "Centro Cultural Gran Capitán",
@@ -317,7 +317,7 @@ export const events: AppEvent[] = [
     title: "Inauguración de tienda vintage con regalo a los primeros 50",
     description:
       "Apertura de nueva tienda vintage en el Realejo. Los primeros 50 se llevan una camiseta gratis.",
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=1200&q=80",
     date: "Vie 25 abr",
     time: "19:00",
     location: "Calle Molinos",
