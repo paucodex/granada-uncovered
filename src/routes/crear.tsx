@@ -34,6 +34,9 @@ const eventSchema = z.object({
   image: z.string().trim().url("URL de imagen no válida").or(z.literal("")),
   sourceType: z.enum(SOURCE_OPTIONS as [SourceType, ...SourceType[]]),
   sourceUrl: z.string().trim().url("URL no válida").optional().or(z.literal("")),
+  isPublic: z.literal(true, {
+    errorMap: () => ({ message: "Confirma que el plan es público" }),
+  }),
 });
 
 type FormErrors = Partial<Record<keyof z.infer<typeof eventSchema>, string>>;
@@ -65,6 +68,7 @@ function CrearPage() {
   const [image, setImage] = useState("");
   const [sourceType, setSourceType] = useState<SourceType>("Boca a boca");
   const [sourceUrl, setSourceUrl] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -91,6 +95,7 @@ function CrearPage() {
       image,
       sourceType,
       sourceUrl,
+      isPublic,
     };
     const parsed = eventSchema.safeParse(payload);
     if (!parsed.success) {
@@ -183,11 +188,15 @@ function CrearPage() {
           tu turno
         </span>
         <h1 className="mt-4 font-display text-4xl font-extrabold leading-tight md:text-5xl">
-          Sube tu <span className="mark-yellow">plan</span>
+          ¿Te has <span className="mark-yellow">enterao</span> de algo? Compártelo
         </h1>
         <p className="mt-3 text-base text-muted-foreground">
-          Cuéntalo claro y corto. Si alguien lo lee, debería querer ir.
+          Si tú lo sabes, alguien más quiere saberlo.
         </p>
+        <div className="mt-4 rounded-xl border-2 border-dashed border-border bg-muted/40 px-4 py-3 text-sm">
+          <strong className="font-bold">Solo planes abiertos al público.</strong>{" "}
+          <span className="text-muted-foreground">Nada de eventos privados.</span>
+        </div>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-6">
           <Field label="Título" error={errors.title}>
