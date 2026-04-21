@@ -46,7 +46,7 @@ export function EventCard({ event }: { event: EventItem }) {
   return (
     <article className="card-lift group relative overflow-hidden rounded-2xl border border-border bg-card">
       {event.featured && (
-        <span className="absolute -top-2 left-4 z-10 rotate-[-4deg] rounded-md bg-foreground px-2 py-1 text-[10px] font-extrabold uppercase tracking-wider text-[color:var(--brand-yellow)]">
+        <span className="absolute left-4 top-4 z-20 rotate-[-4deg] rounded-md bg-foreground px-2 py-1 text-[10px] font-extrabold uppercase tracking-wider text-[color:var(--brand-yellow)] shadow-md">
           ✦ lo viste aquí primero
         </span>
       )}
