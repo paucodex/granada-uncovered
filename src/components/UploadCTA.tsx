@@ -50,11 +50,11 @@ export function UploadCTA() {
           search={{ mode: user ? "login" : "signup", redirect: "/" }}
           className="mt-7 inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-yellow)] px-7 py-3.5 text-base font-extrabold text-foreground transition hover:-translate-y-1"
         >
-          {user ? "Subir un plan" : "Contarlo →"}
+          {user ? "Subir un plan" : "Cuéntalo →"}
         </Link>
         {!user && (
           <p className="mt-3 text-xs text-background/50">
-            Necesitas una cuenta para subir planes (es gratis)
+            Necesitas una cuenta para subir planes (¡es gratis!)
           </p>
         )}
       </div>

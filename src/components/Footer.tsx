@@ -7,7 +7,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-2 text-sm text-muted-foreground">
-            Hecho en Granada con cariño y un poco de cotilleo.
+            Hecho en Granada con mucho cariño, algo de guasa y un poco de cotilleo.
           </p>
         </div>
         <div className="flex gap-6 text-sm font-medium">
