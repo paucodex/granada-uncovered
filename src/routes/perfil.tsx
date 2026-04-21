@@ -259,8 +259,8 @@ function ProfileForm({ userId, email }: { userId: string; email: string }) {
   };
 
   return (
-    <section className="mt-8 rounded-3xl border-2 border-foreground bg-card p-6 shadow-[6px_6px_0_0_var(--foreground)] md:p-8">
-      <div className="flex items-center gap-5">
+      <section className="mt-8 rounded-3xl border-2 border-foreground bg-card p-5 shadow-[6px_6px_0_0_var(--foreground)] sm:p-6 md:p-8">
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
         <div
           className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border-2 border-foreground bg-[color:var(--brand-yellow)] font-display text-2xl font-extrabold"
           style={{ boxShadow: "3px 3px 0 var(--foreground)" }}

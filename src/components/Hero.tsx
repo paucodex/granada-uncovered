@@ -11,7 +11,7 @@ export function Hero() {
             En directo · 26 planes activos en Granada
           </p>
 
-          <h1 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight md:text-6xl lg:text-7xl">
+          <h1 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             ¿No te has{" "}
             <span className="mark-yellow">enterao</span>?
           </h1>
@@ -20,16 +20,16 @@ export function Hero() {
             Planes y eventos están pasando en Granada — pa' que te enteres de to'! 👀
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-col flex-wrap items-stretch gap-3 sm:flex-row sm:items-center">
             <Link
               to="/explorar"
-              className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-blue)] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_oklch(0.58_0.22_263/0.55)] transition hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--brand-blue)] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_oklch(0.58_0.22_263/0.55)] transition hover:-translate-y-0.5"
             >
               Cotillea qué está pasando →
             </Link>
             <Link
               to="/crear"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-5 py-3 text-sm font-semibold transition hover:bg-foreground hover:text-background"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-foreground bg-background px-5 py-3 text-sm font-semibold transition hover:bg-foreground hover:text-background"
             >
               Subir plan
             </Link>

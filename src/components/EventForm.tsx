@@ -315,17 +315,17 @@ export function EventForm({ mode, initialEvent, initialDateIso }: EventFormProps
         ) : null}
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-border pt-6">
+      <div className="flex flex-col-reverse items-stretch justify-between gap-3 border-t border-border pt-6 sm:flex-row sm:items-center">
         <Link
           to={mode === "edit" ? "/mis-eventos" : "/explorar"}
-          className="text-sm text-muted-foreground hover:text-foreground"
+          className="text-center text-sm text-muted-foreground hover:text-foreground sm:text-left"
         >
           Cancelar
         </Link>
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-full bg-foreground px-6 py-3 text-sm font-bold text-background transition hover:-translate-y-0.5 disabled:opacity-60"
+          className="w-full rounded-full bg-foreground px-6 py-3 text-sm font-bold text-background transition hover:-translate-y-0.5 disabled:opacity-60 sm:w-auto"
         >
           {submitting
             ? mode === "edit"
