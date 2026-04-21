@@ -8,7 +8,7 @@ export function Hero() {
         <div className="md:col-span-7">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground">
             <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-[color:var(--brand-neon)]" />
-            En directo · 47 planes en Granada
+            En directo · 26 planes activos en Granada
           </p>
 
           <h1 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight md:text-6xl lg:text-7xl">
@@ -16,8 +16,8 @@ export function Hero() {
             <span className="mark-yellow">enterao</span>?
           </h1>
 
-          <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-            Planes, cultura y cosas que están pasando en Granada — aunque no salgan en Google.
+          <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-base">
+            Planes y eventos están pasando en Granada — pa' que te enteres de to'! 👀
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -25,14 +25,14 @@ export function Hero() {
               href="#semana"
               className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-blue)] px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_oklch(0.58_0.22_263/0.55)] transition hover:-translate-y-0.5"
             >
-              Ver qué está pasando →
+              Cotillea qué está pasando →
             </a>
             <Link
               to="/auth"
               search={{ mode: "signup", redirect: "/" }}
               className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-5 py-3 text-sm font-semibold transition hover:bg-foreground hover:text-background"
             >
-              Subir algo
+              Subir planes
             </Link>
           </div>
         </div>
@@ -44,9 +44,9 @@ export function Hero() {
               Granada · hoy
             </span>
             <div className="grid grid-cols-2 gap-5">
-              <Stat n="47" label="planes activos" />
+              <Stat n="26" label="planes activos" />
               <Stat n="12" label="esta noche" accent="blue" />
-              <Stat n="156" label="esta semana" accent="purple" />
+              <Stat n="52" label="esta semana" accent="purple" />
               <Stat n="8" label="gratis hoy" accent="neon" />
             </div>
             <p className="mt-5 border-t border-border pt-4 text-xs italic text-muted-foreground">

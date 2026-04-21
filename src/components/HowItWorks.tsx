@@ -6,7 +6,7 @@ const steps = [
     n: "01",
     icon: Compass,
     title: "Descubre lo que está pasando",
-    text: "Planes y cosas que ocurren en Granada aunque no salgan en Google.",
+    text: "Planes y eventos que ocurren en Granada que no salen en motores de búsqueda.",
     color: "var(--brand-purple)",
     sticker: "en la calle",
     rotate: "-rotate-2",
@@ -24,7 +24,7 @@ const steps = [
     n: "03",
     icon: Megaphone,
     title: "¿Has visto algo? Súbelo",
-    text: "Si te enteras de algo interesante, compártelo.",
+    text: "Si te enteras de algo interesante, ¡compártelo!.",
     color: "var(--brand-blue)",
     sticker: "tu turno",
     rotate: "-rotate-1",
@@ -38,7 +38,7 @@ export function HowItWorks() {
       className="border-t border-border bg-background py-20 md:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <SectionHeader eyebrow="Cómo va esto">
+        <SectionHeader eyebrow="CÓMO VA">
           ¿Cómo funciona{" "}
           <span className="mark-yellow">ENTÉRATE</span>?
         </SectionHeader>

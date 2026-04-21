@@ -65,7 +65,7 @@ function Index() {
 
         <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
           <SectionHeader
-            eyebrow="Esta semana"
+            eyebrow="LO QUE SE CUECE AHORA"
             cta={
               <a href="#" className="text-sm font-semibold underline-offset-4 hover:underline">
                 Ver toda la agenda →
@@ -92,7 +92,7 @@ function Index() {
           className="border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-24"
         >
           <div className="mx-auto max-w-7xl px-4 md:px-8">
-            <SectionHeader eyebrow="Bajo el radar">
+            <SectionHeader eyebrow="COSITAS OCULTAS">
               ¿No te has enterao de{" "}
               <span className="italic underline decoration-[color:var(--brand-coral)] decoration-[5px] underline-offset-[10px]">
                 esto
