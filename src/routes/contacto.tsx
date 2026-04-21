@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { UploadCTA } from "@/components/UploadCTA";
 
 export const Route = createFileRoute("/contacto")({
   component: ContactoPage,
@@ -47,21 +48,8 @@ function ContactoPage() {
           </div>
         </section>
 
-        <section className="mt-12 rounded-3xl border-2 border-foreground bg-[color:var(--brand-yellow)] p-8 text-center">
-          <h2 className="font-display text-2xl font-extrabold leading-tight md:text-3xl">
-            ¿Te has enterao de algo que el resto no?
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm">
-            No hace falta escribirnos. Súbelo tú mismx, es más rápido.
-          </p>
-          <Link
-            to="/crear"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-extrabold text-background transition hover:-translate-y-0.5"
-          >
-            Subir un plan →
-          </Link>
-        </section>
       </main>
+      <UploadCTA />
       <Footer />
     </div>
   );
