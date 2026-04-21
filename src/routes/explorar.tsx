@@ -46,10 +46,10 @@ function ExplorarPage() {
         <section className="border-b border-border bg-background py-10 md:py-14">
           <div className="mx-auto max-w-5xl px-4 md:px-8">
             <h1 className="font-display text-4xl font-extrabold leading-[1] tracking-tight md:text-5xl">
-              Explora <span className="mark-yellow">Granada</span>
+              Explora y <span className="mark-yellow">entérate</span>
             </h1>
             <p className="mt-3 max-w-xl text-base text-muted-foreground">
-              Descubre lo que está pasando en Granada — aunque no salga en Google.
+              Cotillea qué está pasando por Granada — pa' que te enteres de to' 👀
             </p>
 
             <form
