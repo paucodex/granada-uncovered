@@ -1,10 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { SectionHeader } from "@/components/SectionHeader";
 import { EventCard } from "@/components/EventCard";
-import { Categories, type CategoryFilter } from "@/components/Categories";
+import { Categories } from "@/components/Categories";
 import { UploadCTA } from "@/components/UploadCTA";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Footer } from "@/components/Footer";
@@ -38,59 +37,36 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("Todos");
-
-  const filteredWeek = useMemo(
-    () =>
-      selectedCategory === "Todos"
-        ? thisWeekEvents
-        : thisWeekEvents.filter((event) => event.category === selectedCategory),
-    [selectedCategory],
-  );
-
-  const filteredDiscovery = useMemo(
-    () =>
-      selectedCategory === "Todos"
-        ? discoveryEvents
-        : discoveryEvents.filter((event) => event.category === selectedCategory),
-    [selectedCategory],
-  );
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <main>
         <Hero />
-        <Categories active={selectedCategory} onSelect={setSelectedCategory} />
+        <Categories asLinks />
 
-        <section id="semana" className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
+        <section className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-24">
           <SectionHeader
             eyebrow="LO QUE SE CUECE AHORA"
             cta={
-              <a href="#" className="text-sm font-semibold underline-offset-4 hover:underline">
+              <Link
+                to="/explorar"
+                search={{ q: "", vibe: "todos" }}
+                className="text-sm font-semibold underline-offset-4 hover:underline"
+              >
                 Ver toda la agenda →
-              </a>
+              </Link>
             }
           >
             Esta <span className="mark-yellow">semana</span> en Granada
           </SectionHeader>
-          {filteredWeek.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {filteredWeek.map((e) => (
-                <EventCard key={e.id} event={e} />
-              ))}
-            </div>
-          ) : (
-            <p className="rounded-2xl border-2 border-dashed border-border p-10 text-center text-muted-foreground">
-              Nada de esta vibe esta semana. Prueba otra categoría ✌️
-            </p>
-          )}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {thisWeekEvents.map((e) => (
+              <EventCard key={e.id} event={e} />
+            ))}
+          </div>
         </section>
 
-        <section
-          id="explorar"
-          className="border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-24"
-        >
+        <section className="border-t border-border bg-[oklch(0.97_0.008_90)] py-20 md:py-24">
           <div className="mx-auto max-w-7xl px-4 md:px-8">
             <SectionHeader eyebrow="COSITAS OCULTAS">
               ¿No te has enterao de{" "}
@@ -99,17 +75,11 @@ function Index() {
               </span>
               ?
             </SectionHeader>
-            {filteredDiscovery.length > 0 ? (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {filteredDiscovery.map((e) => (
-                  <EventCard key={e.id} event={e} />
-                ))}
-              </div>
-            ) : (
-              <p className="rounded-2xl border-2 border-dashed border-border p-10 text-center text-muted-foreground">
-                Aún no hay nada bajo el radar de esta categoría.
-              </p>
-            )}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {discoveryEvents.map((e) => (
+                <EventCard key={e.id} event={e} />
+              ))}
+            </div>
           </div>
         </section>
 
