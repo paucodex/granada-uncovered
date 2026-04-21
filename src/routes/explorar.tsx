@@ -60,19 +60,19 @@ function ExplorarPage() {
                   search: { q: query || undefined, vibe: vibe === "todos" ? undefined : vibe },
                 });
               }}
-              className="mt-6 flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-5 py-2.5 shadow-[3px_3px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5"
+              className="mt-6 flex w-full items-center gap-2 rounded-full border-2 border-foreground bg-background px-3 py-2 shadow-[3px_3px_0_0_oklch(0.2_0_0)] transition focus-within:-translate-y-0.5 sm:px-5 sm:py-2.5"
             >
-              <Search className="h-5 w-5 text-muted-foreground" />
+              <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Busca conciertos, mercadillos, talleres…"
-                className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
+                placeholder="Busca planes…"
+                className="w-full min-w-0 bg-transparent text-base outline-none placeholder:text-muted-foreground"
               />
               <button
                 type="submit"
-                className="rounded-full bg-foreground px-4 py-1.5 text-sm font-semibold text-background"
+                className="shrink-0 rounded-full bg-foreground px-3 py-1.5 text-sm font-semibold text-background sm:px-4"
               >
                 Buscar
               </button>

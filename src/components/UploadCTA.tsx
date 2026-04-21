@@ -33,7 +33,7 @@ export function UploadCTA() {
         <span className="inline-block rotate-[-3deg] rounded-full bg-[color:var(--brand-yellow)] px-3 py-1 text-xs font-extrabold uppercase text-foreground">
           tu turno
         </span>
-        <h2 className="mt-5 font-display text-3xl font-extrabold leading-[1] md:text-5xl">
+        <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1] sm:text-4xl md:text-5xl">
           ¿Te has enterao de algo
           <br />
           que{" "}

@@ -54,7 +54,7 @@ function AuthPage() {
         </div>
       </header>
 
-      <main className="mx-auto flex max-w-md flex-col gap-6 px-4 py-16 md:py-24">
+      <main className="mx-auto flex w-full max-w-md flex-col gap-6 px-4 py-12 md:py-24">
         <div>
           <span className="inline-block rotate-[-2deg] rounded-full bg-[color:var(--brand-yellow)] px-3 py-1 text-xs font-extrabold uppercase">
             {isSignup ? "nuevx por aquí" : "de vuelta"}
@@ -107,7 +107,7 @@ function AuthPage() {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-[color:var(--brand-blue)] px-6 py-3.5 text-base font-semibold text-white shadow-[0_8px_24px_-8px_oklch(0.58_0.22_263/0.6)] transition hover:-translate-y-0.5 disabled:opacity-60"
+            className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-[color:var(--brand-blue)] px-6 py-3.5 text-base font-semibold text-white shadow-[0_8px_24px_-8px_oklch(0.58_0.22_263/0.6)] transition hover:-translate-y-0.5 disabled:opacity-60"
           >
             {loading ? "..." : isSignup ? "Crear cuenta" : "Entrar"}
           </button>
