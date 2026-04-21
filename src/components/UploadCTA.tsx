@@ -46,8 +46,7 @@ export function UploadCTA() {
           Súbelo. Seguro que alguien más quiere saberlo.
         </p>
         <Link
-          to="/auth"
-          search={{ mode: user ? "login" : "signup", redirect: "/" }}
+          to="/crear"
           className="mt-7 inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-yellow)] px-7 py-3.5 text-base font-extrabold text-foreground transition hover:-translate-y-1"
         >
           {user ? "Subir un plan" : "Cuéntalo →"}
