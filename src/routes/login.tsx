@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
+import { z } from "zod";
 import { useAuth } from "@/auth/AuthProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -15,24 +16,57 @@ export const Route = createFileRoute("/login")({
   head: () => ({ meta: [{ title: "Iniciar sesión — ENTÉRATE" }] }),
 });
 
+const loginSchema = z.object({
+  email: z.string().trim().email("Ese email no parece válido").max(255),
+  password: z.string().min(1, "Escribe tu contraseña").max(72),
+});
+
+type FieldErrors = Partial<Record<"email" | "password", string>>;
+
 function LoginPage() {
   const { redirect } = useSearch({ from: "/login" });
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    const { error } = await signIn(email, password);
-    setLoading(false);
-    if (error) {
-      toast.error(error.message);
+    setErrors({});
+
+    const parsed = loginSchema.safeParse({ email, password });
+    if (!parsed.success) {
+      const fieldErrors: FieldErrors = {};
+      for (const issue of parsed.error.issues) {
+        const key = issue.path[0] as keyof FieldErrors;
+        if (key && !fieldErrors[key]) fieldErrors[key] = issue.message;
+      }
+      setErrors(fieldErrors);
       return;
     }
-    toast.success("Bienvenido de vuelta");
+
+    setLoading(true);
+    const { error } = await signIn(parsed.data.email, parsed.data.password);
+    setLoading(false);
+
+    if (error) {
+      const msg = error.message;
+      if (/no hay ninguna cuenta/i.test(msg)) {
+        setErrors({ email: msg });
+      } else if (/incorrectos/i.test(msg)) {
+        // Generic credentials error — show under password
+        setErrors({ password: msg });
+      } else if (/email/i.test(msg)) {
+        setErrors({ email: msg });
+      } else {
+        toast.error(msg);
+      }
+      return;
+    }
+
+    toast.success("Bienvenidx de vuelta ✦");
     navigate({ to: redirect || "/" });
   };
 
@@ -52,39 +86,32 @@ function LoginPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <label className="flex flex-col gap-1.5 text-sm font-medium">
-            Email
-            <input
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="rounded-xl border-2 border-border bg-card px-4 py-3 text-base outline-none transition focus:border-foreground"
-              placeholder="tu@email.com"
-            />
-          </label>
-          <label className="flex flex-col gap-1.5 text-sm font-medium">
-            Contraseña
-            <input
-              type="password"
-              required
-              minLength={6}
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-xl border-2 border-border bg-card px-4 py-3 text-base outline-none transition focus:border-foreground"
-              placeholder="mínimo 6 caracteres"
-            />
-          </label>
+        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+          <Field
+            label="Email"
+            type="email"
+            value={email}
+            onChange={setEmail}
+            placeholder="tu@email.com"
+            autoComplete="email"
+            error={errors.email}
+          />
+          <Field
+            label="Contraseña"
+            type="password"
+            value={password}
+            onChange={setPassword}
+            placeholder="Tu contraseña"
+            autoComplete="current-password"
+            error={errors.password}
+          />
 
           <button
             type="submit"
             disabled={loading}
             className="mt-2 inline-flex items-center justify-center rounded-full bg-[color:var(--brand-blue)] px-6 py-3.5 text-base font-semibold text-white shadow-[0_8px_24px_-8px_oklch(0.58_0.22_263/0.6)] transition hover:-translate-y-0.5 disabled:opacity-60"
           >
-            {loading ? "..." : "Entrar"}
+            {loading ? "Entrando…" : "Entrar"}
           </button>
         </form>
 
@@ -101,5 +128,43 @@ function LoginPage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function Field({
+  label,
+  type,
+  value,
+  onChange,
+  placeholder,
+  autoComplete,
+  error,
+}: {
+  label: string;
+  type: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  autoComplete?: string;
+  error?: string;
+}) {
+  return (
+    <label className="flex flex-col gap-1.5 text-sm font-medium">
+      {label}
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        aria-invalid={!!error}
+        className={`rounded-xl border-2 bg-card px-4 py-3 text-base outline-none transition focus:border-foreground ${
+          error ? "border-[color:var(--brand-coral)]" : "border-border"
+        }`}
+      />
+      {error && (
+        <span className="text-xs font-semibold text-[color:var(--brand-coral)]">{error}</span>
+      )}
+    </label>
   );
 }
