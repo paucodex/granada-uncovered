@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventCard } from "@/components/EventCard";
 import { VIBES, eventsByVibe, vibeBySlug } from "@/lib/events-data";
+import { UploadCTA } from "@/components/UploadCTA";
 
 export const Route = createFileRoute("/categoria/$slug")({
   loader: ({ params }) => {
@@ -139,24 +140,7 @@ function CategoriaPage() {
         </section>
 
         {/* CTA final */}
-        <section className="border-t border-border bg-background py-16 md:py-20">
-          <div className="mx-auto max-w-3xl px-4 text-center md:px-8">
-            <h2 className="font-display text-3xl font-extrabold leading-[1.05] tracking-tight md:text-4xl">
-              ¿Te has enterao de algo
-              <br className="hidden md:block" />{" "}
-              que <span className="italic underline decoration-[color:var(--brand-coral)] decoration-4 underline-offset-8">el resto no</span>?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
-              Súbelo. Seguro que alguien más quiere saberlo.
-            </p>
-            <Link
-              to="/crear"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-base font-extrabold text-background transition hover:-translate-y-1"
-            >
-              Cuéntalo →
-            </Link>
-          </div>
-        </section>
+        <UploadCTA />
       </main>
       <Footer />
     </div>
