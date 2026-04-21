@@ -34,7 +34,7 @@ export function UploadCTA() {
           tu turno
         </span>
         <h2 className="mt-5 font-display text-3xl font-extrabold leading-[1] md:text-5xl">
-          ¿Te has enterado de algo
+          ¿Te has enterao de algo
           <br />
           que{" "}
           <span className="italic underline decoration-[color:var(--brand-yellow)] decoration-4 underline-offset-8">
