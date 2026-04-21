@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EventCard } from "@/components/EventCard";
+import { UploadCTA } from "@/components/UploadCTA";
 import { VIBES, eventsByVibe, searchEvents, vibeBySlug, type Vibe } from "@/lib/events-data";
 
 type ExplorarSearch = { q?: string; vibe?: string };
