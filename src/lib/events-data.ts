@@ -332,15 +332,41 @@ export const events: AppEvent[] = [
   },
 ];
 
+// --- User events (created via /crear) merged into public feeds ---
+// Stored in localStorage under "enterate.user_events.v1" (see lib/user-events.ts).
+function readUserEvents(): AppEvent[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem("enterate.user_events.v1");
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as AppEvent[];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+/** All events: curated mock + user-created, deduped by id (user wins on conflict). */
+export function allEvents(): AppEvent[] {
+  const userEvents = readUserEvents();
+  if (userEvents.length === 0) return events;
+  const userIds = new Set(userEvents.map((e) => e.id));
+  const curated = events.filter((e) => !userIds.has(e.id));
+  // Newest user events first so they're discoverable on public feeds.
+  return [...userEvents, ...curated];
+}
+
 export function eventsByVibe(vibe: Vibe | "Todos"): AppEvent[] {
-  if (vibe === "Todos") return events;
-  return events.filter((e) => e.tags.includes(vibe) || e.mainCategory === vibe);
+  const list = allEvents();
+  if (vibe === "Todos") return list;
+  return list.filter((e) => e.tags.includes(vibe) || e.mainCategory === vibe);
 }
 
 export function searchEvents(q: string): AppEvent[] {
+  const list = allEvents();
   const t = q.trim().toLowerCase();
-  if (!t) return events;
-  return events.filter(
+  if (!t) return list;
+  return list.filter(
     (e) =>
       e.title.toLowerCase().includes(t) ||
       e.description.toLowerCase().includes(t) ||
@@ -351,22 +377,17 @@ export function searchEvents(q: string): AppEvent[] {
 }
 
 export function getEvent(id: string): AppEvent | undefined {
-  const fromMock = events.find((e) => e.id === id || e.slug === id);
-  if (fromMock) return fromMock;
-  if (typeof window !== "undefined") {
-    try {
-      const raw = window.localStorage.getItem("enterate.user_events.v1");
-      if (raw) {
-        const list = JSON.parse(raw) as AppEvent[];
-        return list.find((e) => e.id === id || e.slug === id);
-      }
-    } catch {
-      /* ignore */
-    }
-  }
-  return undefined;
+  return allEvents().find((e) => e.id === id || e.slug === id);
 }
 
-// Subconjuntos para la home (preservar la estructura visual actual)
+// Subconjuntos para la home — mezclan eventos de usuarios (recientes primero)
+// con la selección curada para que los nuevos planes aparezcan en la portada.
+export function getThisWeekEvents(): AppEvent[] {
+  return allEvents().slice(0, 6);
+}
+export function getDiscoveryEvents(): AppEvent[] {
+  return allEvents().slice(6, 12);
+}
+// Backwards-compat exports (snapshot at module load — for SSR / non-reactive uses)
 export const thisWeekEvents = events.slice(0, 6);
 export const discoveryEvents = events.slice(6, 12);
